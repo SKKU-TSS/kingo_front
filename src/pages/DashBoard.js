@@ -13,26 +13,56 @@ import {
   
   function DashBoard() {
     // 대시보드 페이지
-    const [isLessThan1070] = useMediaQuery("(max-width:1070px)");
+   
+
+
+
     return (
-      <Flex wrap="wrap" w="full" h="full" justify="space-evenly" bg="#E5E5E5">
-        <Flex
-          flexGrow="1"
-          justify="space-between"
-          p={5}
-          wrap="wrap"
-          minW="350px"
-          w={isLessThan1070 ? "full" : "60%"}
-        >
+        <FlexContainer>
           <TotalPoint />
           <PointStatus />
           <AccountInfo />
           <PointPieChart />
           <PointStatus />
           {/* <AdminPage /> */}
-        </Flex>
-      </Flex>
+        </FlexContainer>
     );
   }
+
+
+  const FlexContainer = ({children}) =>{
+
+    const [isLessThan1070] = useMediaQuery("(max-width:1070px)");
+
+
+    const outterStyle = {
+        width : "full",
+        height : "full",
+        justify : "space-evenly",
+        backgroundColor : "#E5E5E5"
+    }
+
+    const innerStyle = {
+        flexGrow : "1",
+        justify : "space-between",
+        p : "5",
+        minW : "350px",
+        w : isLessThan1070 ? "full" : "60%"
+    }
+
+
+    return(
+      <Flex wrap="wrap"
+      style = {outterStyle}>
+        <Flex
+          wrap="wrap"
+          style = {innerStyle}
+        >
+          {children}
+        </Flex>
+        </Flex>
+    )
+  }
+
   
   export default DashBoard;

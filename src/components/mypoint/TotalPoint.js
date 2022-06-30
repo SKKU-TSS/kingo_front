@@ -2,8 +2,42 @@ import { Text, HStack, Box, VStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import axios from "axios";
+import BACKEND_URL from "../../ServerConst";
 
-function TotalPoint() {
+
+const TEXT_TOTAL_TITLE = "총 보유 포인트"
+
+
+function getUserInfo(account, callback){
+
+  axios
+      .get(BACKEND_URL + "api/userinfo", {
+        params: {
+          id: account,
+        },
+      }).then(
+        (response) =>{
+          callback(response);
+        }
+      )
+
+}
+
+
+function reducePointData(response, pointArr)
+{
+  return pointArr.concat(
+    response.data[0]._pointA,
+    response.data[0]._pointB,
+    response.data[0]._pointC,
+    response.data[0]._pointD
+  );
+};
+
+
+
+
+const TotalPoint = () => {
   // 모든 플랫폼의 포인트의 합을 보여주는 컴포넌트
 
   const [pointArr, setPointArr] = useState([]);
@@ -11,25 +45,12 @@ function TotalPoint() {
 
   useEffect(() => {
     let isSubscribed = true;
-    axios
-      .get("http://localhost:5000/api/userinfo", {
-        params: {
-          id: account,
-        },
-      })
-      .then(function (response) {
-        console.log(response.data);
-        if (isSubscribed) {
-          setPointArr(
-            pointArr.concat(
-              response.data[0]._pointA,
-              response.data[0]._pointB,
-              response.data[0]._pointC,
-              response.data[0]._pointD
-            )
-          );
-        }
-      });
+    getUserInfo(account,(response) =>{
+      if (isSubscribed) {
+        setPointArr(
+          reducePointData(response,pointArr));
+      }
+    })
     return () => (isSubscribed = false);
   }, []);
 
@@ -43,30 +64,53 @@ function TotalPoint() {
 
   const sumPoint = sumTotalPoint();
 
+  
+  
   return (
+    <TotalPointView>{sumPoint}</TotalPointView>
+  );
+}
+
+const TotalPointView = ({children}) =>{
+  const style = {
+    justifyContent :"space-between",
+    backgroundImage : "linear-gradient(#532DFB,#868CFF)",
+    width : "100%",
+    height : "204px",
+    borderRadius : "15px"
+  }
+
+
+  return(
     <VStack
-      justify="space-between"
-      p={5}
-      m={3}
-      backgroundImage="linear-gradient(#532DFB,#868CFF)"
-      w="full"
-      h="204px"
-      borderRadius={15}
-    >
-      <HStack w="full" justify="space-between">
+    p={5}
+    m={3}
+    style = {style}
+  >
+    <TopText/>
+    <CountText sumPoint={children}/>
+  </VStack>
+  );
+}
+
+const TopText = () => {
+  return(
+    <HStack w="full" justify="space-between">
         <Text color="white" fontWeight="700" fontSize="3xl">
-          총 보유 포인트
+         {TEXT_TOTAL_TITLE}
         </Text>
         <Box />
       </HStack>
-      <HStack w="full" justify="space-between">
+  );
+};
+
+const CountText = ({sumPoint}) =>{
+  return(<HStack w="full" justify="space-between">
         <Box />
         <Text color="white" fontWeight="700" fontSize="5xl">
           {sumPoint} point
         </Text>
-      </HStack>
-    </VStack>
-  );
+      </HStack>);
 }
 
 export default TotalPoint;

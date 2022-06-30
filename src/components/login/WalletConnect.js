@@ -11,6 +11,9 @@ function WalletConnect() {
   // metamask 로그인 페이지
   const { activate, active } = useWeb3React();
   console.log(active);
+
+
+  // todo : Redux 도입 필요
   const onClick = () => {
     activate(injectedConnector); //로그인 코드
   };
