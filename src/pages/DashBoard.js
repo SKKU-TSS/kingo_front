@@ -6,10 +6,10 @@ import {
     Box,
     useMediaQuery,
   } from "@chakra-ui/react";
-  import TotalPoint from "../components/TotalPoint";
-  import PointStatus from "../components/PointStatus";
-  import PointPieChart from "../components/PointPieChart";
-  import AccountInfo from "../components/AccountInfo";
+  import TotalPoint from "../components/mypoint/TotalPoint";
+  import PointStatus from "../components/dashboard/PointStatus";
+  import PointPieChart from "../components/dashboard/PointPieChart";
+  import AccountInfo from "../components/dashboard/AccountInfo";
   
   function DashBoard() {
     // 대시보드 페이지

@@ -1,7 +1,7 @@
 import { Flex, HStack, Text, VStack, Box } from "@chakra-ui/layout";
-import LatestTransactions from "../components/CheckTransactions";
+import LatestTransactions from "../components/transaction/CheckTransactions";
 import { useState } from "react";
-import Clock from "../components/Clock";
+import Clock from "../components/transaction/Clock";
 function Transaction() {
   // 내 트랜잭션들이 ipfs 에 올라갔는지 확인할 수 있는 페이지
   const [modalOn, setModalOn] = useState(false);

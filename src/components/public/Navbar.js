@@ -1,10 +1,10 @@
 // 모든 페이지에 들어가는 부분으로 왼쪽에 있는 메뉴바 구성
 import { useState } from "react";
 import { VStack, HStack, Img, Text, Link } from "@chakra-ui/react";
-import activeDashboard from "../assets/activeDashboard.svg";
-import dashboard from "../assets/dashboard.svg";
-import transactions from "../assets/transactions.svg";
-import activeTransactions from "../assets/activeTransactions.svg";
+import activeDashboard from "../../assets/activeDashboard.svg";
+import dashboard from "../../assets/dashboard.svg";
+import transactions from "../../assets/transactions.svg";
+import activeTransactions from "../../assets/activeTransactions.svg";
 import { Link as RouterLink } from "react-router-dom";
 
 function NavBar() {

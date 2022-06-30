@@ -2,7 +2,7 @@
 // 내 지갑 Address와 관련된 모든 내역을 보여준다.
 
 import styled from "styled-components";
-import kakaoTalk from "../assets/kakaoTalk.png";
+import kakaoTalk from "../../assets/kakaoTalk.png";
 import { HStack, Text } from "@chakra-ui/layout";
 import { Button, Link } from "@chakra-ui/react";
 import { useState, useEffect } from "react";

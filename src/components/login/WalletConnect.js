@@ -1,5 +1,5 @@
 import { useWeb3React } from "@web3-react/core";
-import { injectedConnector } from "../connector";
+import { injectedConnector } from "../../connector";
 import { Box, Text, VStack, Link } from "@chakra-ui/react";
 
 function WalletConnect() {

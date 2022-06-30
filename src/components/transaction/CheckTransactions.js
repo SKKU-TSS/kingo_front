@@ -1,6 +1,6 @@
 import { HStack, Text } from "@chakra-ui/layout";
 import styled from "styled-components";
-import kakaoTalk from "../assets/kakaoTalk.png";
+import kakaoTalk from "../../assets/kakaoTalk.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Link } from "@chakra-ui/react";

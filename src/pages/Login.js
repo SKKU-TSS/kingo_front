@@ -1,4 +1,4 @@
-import WalletConnect from "../components/WalletConnect";
+import WalletConnect from "../components/login/WalletConnect";
 
 function Login() {
     return <WalletConnect />;

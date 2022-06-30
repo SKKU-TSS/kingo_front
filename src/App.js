@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
-import NavBar from "./components/Navbar.js";
+import NavBar from "./components/public/Navbar.js";
 import { Container, Flex } from "@chakra-ui/react";
 import DashBoard from "./pages/DashBoard";
 import MyPoint from "./pages/MyPoint";
