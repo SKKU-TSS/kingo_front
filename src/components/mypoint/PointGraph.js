@@ -23,15 +23,13 @@ function change_date(published_at) {
 
 function getDateArr(){
   var now = new Date().getDate(); // 현재 날짜 및 시간
-  const date = [
-    change_date(new Date(new Date().setDate(now - 1))),
-    change_date(new Date(new Date().setDate(now - 2))),
-    change_date(new Date(new Date().setDate(now - 3))),
-    change_date(new Date(new Date().setDate(now - 4))),
-    change_date(new Date(new Date().setDate(now - 5))),
-    change_date(new Date(new Date().setDate(now - 6))),
-  ];
-
+  var date = [];
+  var i ;
+  for(i = 0 ; i < 6;i++)
+  {
+    const nDate = change_date(new Date(new Date().setDate(now - 6 + i)));
+    date.push(nDate);
+  }
   return date;
 
 }
