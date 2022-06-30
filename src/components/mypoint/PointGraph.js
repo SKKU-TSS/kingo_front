@@ -10,80 +10,77 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
-import TotalPoint from "./TotalPoint";
+
+import getGraphData from "../../remote/GraphData";
+
+
+function change_date(published_at) {
+  var moment = require("moment");
+  const publish_date = moment(published_at).format("YYYY년 MM월 DD일");
+  return publish_date;
+}
+
+
+function getDateArr(){
+  var now = new Date().getDate(); // 현재 날짜 및 시간
+  const date = [
+    change_date(new Date(new Date().setDate(now - 1))),
+    change_date(new Date(new Date().setDate(now - 2))),
+    change_date(new Date(new Date().setDate(now - 3))),
+    change_date(new Date(new Date().setDate(now - 4))),
+    change_date(new Date(new Date().setDate(now - 5))),
+    change_date(new Date(new Date().setDate(now - 6))),
+  ];
+
+  return date;
+
+}
+
+function mapChartData(date, pointState)
+{
+  var chartdata = [];
+  var i = 0;
+  for(i=0; i<6; i++)
+  {
+    chartdata.push({
+      date : date[i],
+      point : pointState[i]
+    });
+  }
+  return chartdata;
+}
+
+
 
 export default function PointGraph() {
   //날짜별 포인트 변화를 꺾은 선 그래프로 보여주는 컴포넌트
-  var chartdata;
-  var moment = require("moment");
-  var now = new Date().getDate(); // 현재 날짜 및 시간
-  function change_date(published_at) {
-    const publish_date = moment(published_at).format("YYYY년 MM월 DD일");
-    return publish_date;
-  }
+ 
+  
   var Today = change_date(new Date());
-  var Date1 = change_date(new Date(new Date().setDate(now - 1)));
-  var Date2 = change_date(new Date(new Date().setDate(now - 2)));
-  var Date3 = change_date(new Date(new Date().setDate(now - 3)));
-  var Date4 = change_date(new Date(new Date().setDate(now - 4)));
-  var Date5 = change_date(new Date(new Date().setDate(now - 5)));
-  var Date6 = change_date(new Date(new Date().setDate(now - 6)));
-  const [Day6State, setDay6State] = useState(0);
-  const [Day5State, setDay5State] = useState(0);
-  const [Day4State, setDay4State] = useState(0);
-  const [Day3State, setDay3State] = useState(0);
-  const [Day2State, setDay2State] = useState(0);
-  const [Day1State, setDay1State] = useState(0);
+
+  const [pointState, setPointState] = useState([0,1,5,4,0,0]);
   const [TodayState, setTodayState] = useState(0);
+
+  const date = getDateArr();
+
   const { account } = useWeb3React();
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/graph", {
-        params: {
-          id: account,
-        },
-      })
-      .then(function (response) {
+    getGraphData(account,response => {
         console.log(response.data);
-        setDay6State(response.data[0]?.Day_6);
-        setDay5State(response.data[0]?.Day_5);
-        setDay4State(response.data[0]?.Day_4);
-        setDay3State(response.data[0]?.Day_3);
-        setDay2State(response.data[0]?.Day_2);
-        setDay1State(response.data[0]?.Day_1);
-        setTodayState(response.data[0]?.Today);
+        const d = response.data[0];
+        if(d !== null && d !== undefined)
+        {
+          setPointState(
+            [d.Day_1, d.Day_2, d.Day_3, d.Day_4, d.Day_5, d.Day_6]
+          );
+          setTodayState(d.Today);
+        }  
       });
   }, []);
-  chartdata = [
-    {
-      date: Date6,
-      point: Day6State,
-    },
-    {
-      date: Date5,
-      point: Day5State,
-    },
-    {
-      date: Date4,
-      point: Day4State,
-    },
-    {
-      date: Date3,
-      point: Day3State,
-    },
-    {
-      date: Date2,
-      point: Day2State,
-    },
-    {
-      date: Date1,
-      point: Day1State,
-    },
-    {
-      date: Today,
-      point: TodayState,
-    },
-  ];
+
+
+  const chartdata = mapChartData(date,pointState);
+  
   return (
     <ResponsiveContainer width="95%" height={210} debounce={1}>
       <LineChart
