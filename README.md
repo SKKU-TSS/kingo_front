@@ -10,20 +10,34 @@ The frontend source code of Kingo-Coin Project
 
 
 📦src
+
   📦assets
+  
   📦components
+  
     📦dashboard
+    
     📦login
+    
     📦mypoint
+    
     📦public
+    
     📦transaction
+    
   📦connector
+  
   📦library
+  
   📦pages
+  
   📦remote
+  
     📦response
   🧾App.js
+  
   🧾index.js
+  
   🧾ServerConst.js
   
   
