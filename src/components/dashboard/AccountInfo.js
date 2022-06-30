@@ -11,52 +11,77 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
+import { m } from "framer-motion";
+
+const TEXT_MY_ACCOUNT = '내 지갑 주소 : ';
+
 
 function AccountInfo() {
   // klaytn 사이트에서 내 계정 정보를 볼 수 있도록 하는 컴포넌트
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
   const { account } = useWeb3React();
-  const parseAccount =
-    account && account?.substring(0, 10) + "..." + account?.substring(32, 40);
+
+  const accountSting = account?.substring(2, 6);
+
   const parseAccountForColor = "#" + account?.substring(2, 8);
-  const etherscanAccount = `https://baobab.scope.klaytn.com/account/${account}?tabId=txList`;
+  
   //klaythn scope 에서 내 계정에 관한 리스트
 
   console.log(parseAccountForColor);
+
+  const styleVstack = {
+    borderRadius : "15px",
+    width : isLessThan1195 ? "100%" : "45%",
+    height : "355px",
+    justifyContent : "center",
+    spacing : "5",
+    backgroundColor : "white"
+  }
+
+  const styleFlex = {
+    width : "110px",
+    height : "110px",
+    align : "center",
+    justifyContent : "center",
+    borderRadius : "100px",
+    fontFamily : "'Pacifico', cursive",
+    fontSize : "3xl",
+    backgroundColor : parseAccountForColor,
+  }
+
+
+
   return (
-    <VStack
-      borderRadius={15}
-      bg="white"
-      p={10}
-      h="355px"
-      w={isLessThan1195 ? "full" : "45%"}
-      m={3}
-      justify="center"
-      spacing={5}
-    >
-      <Flex
-        backgroundColor={parseAccountForColor}
-        borderRadius={100}
-        w="110px"
-        h="110px"
-        align="center"
-        justify="center"
-        fontFamily="'Pacifico', cursive"
-        fontSize="3xl"
-      >
-        {account?.substring(2, 6)}
+    <VStack p={10} m={3} spacing={5} style = {styleVstack}>
+      <Flex align="center" fontSize="3xl" style = {styleFlex}>
+        {accountSting}
       </Flex>
-      <Text fontSize="lg">내 지갑 주소 : </Text>
-      <Tooltip label={account}>
-        <Text>{parseAccount}</Text>
-      </Tooltip>
+      <MyAccountAddr account = {account}/>
       {account && (
-        <Button as={Link} isExternal href={etherscanAccount}>
-          View on klaytn scope
-        </Button>
+        <BtnKlaytn account={account}/>
       )}
     </VStack>
   );
+}
+
+const MyAccountAddr = ({account}) =>{
+
+  const parseAccount =
+  account && account?.substring(0, 10) + "..." + account?.substring(32, 40);
+
+  return(<VStack>
+    <Text fontSize="lg">{TEXT_MY_ACCOUNT}</Text>
+    <Tooltip label={account}>
+      <Text>{parseAccount}</Text>
+    </Tooltip>
+  </VStack>);
+}
+
+const BtnKlaytn = ({account}) =>{
+  const etherscanAccount = `https://baobab.scope.klaytn.com/account/${account}?tabId=txList`;
+  return(<Button as={Link} isExternal href={etherscanAccount}>
+    View on klaytn scope
+  </Button>)
 }
 
 export default AccountInfo;
