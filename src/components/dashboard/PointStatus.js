@@ -1,18 +1,19 @@
 import { VStack, HStack, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
-import axios from "axios";
+import getUserInfo from "../../remote/AccountInfo";
 
-function PointStatus() {
+const TEXT_POINT_INFO = '포인트 현황';
+
+const PointStatus = () => {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
   const [pointArr, setPointArr] = useState([]);
   const { account } = useWeb3React();
 
   useEffect(() => {
     let isSubscribed = true;
-    axios
-      .get("http://localhost:5000/api/userInfo", { params: { id: account } })
-      .then(function (response) {
+
+    getUserInfo(account,(response)=>{
         if (isSubscribed) {
           setPointArr(
             pointArr.concat(
@@ -28,39 +29,47 @@ function PointStatus() {
   }, []);
 
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
+  
+  
+  
+  const style = {
+    borderRadius : "15px",
+    backgroundColor : "white",
+    height:  "355px",
+    width : isLessThan1195 ? "100%" : "45%"
+  }
+  
+  
+  
   return (
     <VStack
-      borderRadius={15}
-      bg="white"
-      p={10}
-      align="flex-start"
-      h="355px"
-      w={isLessThan1195 ? "full" : "45%"}
-      m={3}
-    >
+      style = {style}      p={10}      align="flex-start"      m={3}    >
       <Text fontSize="3xl" fontWeight="700">
-        포인트 현황
+        {TEXT_POINT_INFO}
       </Text>
       <VStack spacing={10} w="full">
-        <HStack w="full" justify="space-between">
-          <Text fontSize="lg">Service A</Text>
-          <Text fontSize="lg">{pointArr[0]}</Text>
-        </HStack>
-        <HStack w="full" justify="space-between">
-          <Text fontSize="lg">Service B</Text>
-          <Text fontSize="lg">{pointArr[1]}</Text>
-        </HStack>
-        <HStack w="full" justify="space-between">
-          <Text fontSize="lg">Service C</Text>
-          <Text fontSize="lg">{pointArr[2]}</Text>
-        </HStack>
-        <HStack w="full" justify="space-between">
-          <Text fontSize="lg">Service D</Text>
-          <Text fontSize="lg">{pointArr[3]}</Text>
-        </HStack>
+        <PointItem title = "Service A" point = {pointArr[0]}/>
+        <PointItem title = "Service B" point = {pointArr[1]}/>
+        <PointItem title = "Service C" point = {pointArr[2]}/>
+        <PointItem title = "Service D" point = {pointArr[3]}/>
+
       </VStack>
     </VStack>
   );
+}
+
+
+const PointItem = ({title, point}) =>{
+
+  const styleContainer = {
+    width : "100%",
+    justifyContent : "space-between"
+  }
+
+  return(<HStack style = {styleContainer}>
+  <Text fontSize="lg">{title}</Text>
+  <Text fontSize="lg">{point}</Text>
+</HStack>)
 }
 
 export default PointStatus;

@@ -1,27 +1,13 @@
 import { Text, HStack, Box, VStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
-import axios from "axios";
-import BACKEND_URL from "../../ServerConst";
+import getUserInfo from "../../remote/AccountInfo";
 
 
 const TEXT_TOTAL_TITLE = "총 보유 포인트"
 
 
-function getUserInfo(account, callback){
 
-  axios
-      .get(BACKEND_URL + "api/userinfo", {
-        params: {
-          id: account,
-        },
-      }).then(
-        (response) =>{
-          callback(response);
-        }
-      )
-
-}
 
 
 function reducePointData(response, pointArr)
