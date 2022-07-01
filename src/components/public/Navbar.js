@@ -7,110 +7,80 @@ import transactions from "../../assets/transactions.svg";
 import activeTransactions from "../../assets/activeTransactions.svg";
 import { Link as RouterLink } from "react-router-dom";
 
-function NavBar() {
-  // 좌측 navbar 구현
 
-  const [index, setIndex] = useState(0);
+const INDEX_DASHBOARD = 0;
+const INDEX_POINT = 1;
+const INDEX_TRANSACTION = 2;
+const INDEX_ADMIN = 3;
+
+function getIndex(state){
+  const [index, setIndex] = state;
   const path = window.location.pathname.split("/").pop();
 
   if (path === "/dashboard") {
-    index !== 0 && setIndex(0);
+    index !== INDEX_DASHBOARD && setIndex(INDEX_DASHBOARD);
   } else if (path === "my-transaction") {
-    index !== 1 && setIndex(1);
+    index !== INDEX_POINT && setIndex(INDEX_POINT);
   } else if (path === "check-transactions") {
-    index !== 2 && setIndex(2);
+    index !== INDEX_TRANSACTION  && setIndex(INDEX_TRANSACTION );
   }
+  return [index, setIndex];
+}
+
+
+function NavBar() {
+  // 좌측 navbar 구현
+
+  const [index, setIndex] = getIndex(useState(0));
+  
 
   return (
     <VStack spacing={8} p={9} bg="#ffffff" minW="200px">
-      <HStack>
-        <Text fontSize="xl" fontWeight="900" color="#4318FF">
-          KingoChain
-        </Text>
-      </HStack>
+      <NavTitle/>
       <VStack h="full" justify="space-between" spacing={5}>
         <VStack>
-          <Link onClick={() => setIndex(0)} as={RouterLink} to="/dashboard">
-            <HStack
-              p={3}
-              borderRadius={5}
-              w="130px"
-              bg={index === 0 ? "#4318FF" : "#ffffff"}
-              spacing={3}
-            >
-              <Img src={index === 0 ? activeDashboard : dashboard} />
-              <Text
-                fontSize="sm"
-                fontWeight="bold"
-                color={index === 0 ? "#ffffff" : "#A3AED0"}
-              >
-                대시보드
-              </Text>
-            </HStack>
-          </Link>
-          <Link
-            onClick={() => setIndex(1)}
-            as={RouterLink}
-            to="/my-point"
-          >
-            <HStack
-              p={3}
-              borderRadius={5}
-              w="130px"
-              bg={index === 1 ? "#4318FF" : "#ffffff"}
-              spacing={3}
-            >
-              <Img src={index === 1 ? activeTransactions : transactions} />
-              <Text
-                fontSize="sm"
-                fontWeight="bold"
-                color={index === 1 ? "#ffffff" : "#A3AED0"}
-              >
-                Point 현황
-              </Text>
-            </HStack>
-          </Link>
+          <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_DASHBOARD} nav="/dashboard" icon={[dashboard, activeDashboard]}>대시보드</BtnNavigation>
+          <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_POINT} nav="/my-point" icon={[transactions, activeTransactions]}>Point 현황</BtnNavigation>
+          {/**  <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_ADMIN} nav="/admin-page">관리자 페이지</BtnNavigation> */}
         </VStack>
-        <Link
-          onClick={() => setIndex(2)}
-          as={RouterLink}
-          to="/check-transactions"
-        >
-          <HStack
-            p={2}
-            borderRadius={5}
-            w="130px"
-            bg={index === 2 ? "#4318FF" : "#ffffff"}
-          >
-            <Text
-              fontSize="sm"
-              fontWeight="bold"
-              color={index === 2 ? "#ffffff" : "#00000"}
-            >
-              Transaction
-            </Text>
-          </HStack>
-        </Link>
-        {/* <Link onClick={() => setIndex(3)} as={RouterLink} to="/admin-page">
-                    <HStack
-                        p={3}
-                        borderRadius={5}
-                        w="130px"
-                        bg={index === 3 ? "#4318FF" : "#ffffff"}
-                        spacing={3}
-                    >
-                        <Text
-                            fontSize="sm"
-                            fontWeight="bold"
-                            color={index === 3 ? "#ffffff" : "#A3AED0"}
-                        >
-                            관리자 페이지
-                        </Text>
-                    </HStack>
-                </Link> */}
+        <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_TRANSACTION} nav="/check-transactions" >Transaction</BtnNavigation>
       </VStack>
     </VStack>
   );
 }
+const NavTitle = () =>{
+
+  return(<HStack>
+    <Text fontSize="xl" fontWeight="900" color="#4318FF">
+      KingoChain
+    </Text>
+  </HStack>);
+}
+
+
+const BtnNavigation = ({indexState, btnIndex, nav, icon, children}) =>{
+  const [index,setIndex] = indexState;
+  const [_icon, _activeIcon] = icon || [undefined, undefined];
+  const styleHstack = {
+    width : "130px",
+    backgroundColor : index === btnIndex ? "#4318FF" : "#ffffff",
+    borderRadius : "5px"
+  };
+  return(<Link onClick={() => setIndex(btnIndex)} as={RouterLink} to={nav}>
+  <HStack    p={3}    spacing={3} style={styleHstack}>
+    {icon && 
+      (<Img src={index === btnIndex ? _activeIcon : _icon} />)
+    }
+    <Text
+      fontSize="sm"
+      fontWeight="bold"
+      color={index === btnIndex ? "#ffffff" : "#A3AED0"}
+    >
+      {children}
+    </Text>
+  </HStack>
+</Link>);
+}
+
 
 export default NavBar;

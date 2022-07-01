@@ -32,49 +32,58 @@ const Time = styled.td`
 `;
 
 const TransactionTable = ({type, transData}) => {
-    const displayedTable = [];
+    
+    return (
+      <Table>
+        <TransactionHead type = {type}/>
+        <DisplayTable type = {type} transData = {transData}/>
+      </Table>
+    );
+  };
+
+const DisplayTable = ({type, transData}) =>{
+  const displayedTable = [];
     for (let i = 0; i < transData.length; i++) {
       displayedTable.push(
           <SendItem transData={transData[i]} key={i} type = {type}/>
       );
     }
-    return (
-      <Table>
-        <TransactionHead type = {type}/>
-
-        <tbody>{displayedTable}</tbody>
-      </Table>
-    );
-  };
-
+  return(<tbody>{displayedTable}</tbody>);
+}
 
 const SendItem = ({transData, type}) =>{
 
     const width = 100/ (type ? 5 : 6);
 
     return(<tr>
-      <Td width = {width + '%'}>
-        <HStack justifyContent="center">
-          <Icon src={kakaoTalk} />
-          <Text>kakaoPay</Text>
-        </HStack>
-      </Td>
+      <SourceView  width = {width + '%'} icon={kakaoTalk} text={"KakaoPay"}/>
       <Time width = {width + '%'}>{transData.date}</Time>
-      {
-             type !== "from" && (<Td width = {width + '%'}>{transData.to}</Td>)
-      }
-      {
-            type !== "to" && (<Td width = {width + '%'}>{transData.from}</Td>)
-      }
+      { type !== "from" && (<Td width = {width + '%'}>{transData.to}</Td>)    }
+      { type !== "to" && (<Td width = {width + '%'}>{transData.from}</Td>)    }
       {/* <Td>{ipfs[i]}</Td> */}
       <Td width = {width + '%'}>{transData.value}</Td>
-  
-      <Td width = {width + '%'}>
-        <Button size="xs" as={Link} isExternal>
-          {transData.hash}
-        </Button>
-      </Td>
+      <BtnHash width = {width + '%'} link = {Link} text = {transData.hash}/>
     </tr>);
+  }
+
+  const SourceView = ({icon, text}) =>{
+
+    return(
+    <Td>
+      <HStack justifyContent="center">
+        <Icon src={icon} />
+        <Text>{text}</Text>
+      </HStack>
+    </Td>);
+  }
+
+  const BtnHash = ({link, text}) =>{
+
+    return(<Td>
+      <Button size="xs" as={link} isExternal>
+        {text}
+      </Button>
+    </Td>);
   }
 
   const TransactionHead = ({type}) =>{
