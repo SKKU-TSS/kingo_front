@@ -30,18 +30,7 @@ function Transaction() {
           <Text color="#4318FF" fontWeight={700} fontSize="lg">
             Latest Transaction
           </Text>
-          <Box
-            as="button"
-            backgroundColor="#4318FF"
-            color="white"
-            borderRadius="3px"
-            width="60px"
-            fontWeight="bold"
-            onClick={onOpenModal}
-          >
-            + More
-            
-          </Box>
+          <BtnMore onOpenModal={onOpenModal}/>
         </HStack>
         {modalOn ? <LatestTransactions /> : ""}
         <LatestTransactions />
@@ -66,6 +55,22 @@ function Transaction() {
       </VStack>
     </Flex>
   );
+}
+
+const BtnMore = ({onOpenModal}) =>{
+
+  return(<Box
+    as="button"
+    backgroundColor="#4318FF"
+    color="white"
+    borderRadius="3px"
+    width="60px"
+    fontWeight="bold"
+    onClick={onOpenModal}
+  >
+    + More
+    
+  </Box>)
 }
 
 const LastBlock = () =>{
