@@ -6,6 +6,7 @@ import axios from "axios";
 import { Button, Link } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import getHash from "../../remote/GetHash";
+import getHashResult from "../../remote/GetHashResult";
 const Table = styled.table`
   width: 100%;
 `;
@@ -33,12 +34,12 @@ const Time = styled.td`
   text-align: center;
 `;
 
-function extractUrlList(ret, setHashUrl){
+async function extractUrlList(ret, setHashUrl){
   let urlList = [];
   for (let i = 0; i < ret.length; i++) {
-    axios
-      .get(`http://localhost:5000/api/result/${ret[i].hash}`)
-      .then((res) => urlList.push(res.data));
+    await getHashResult(ret[i].hash,(res)=>{
+      urlList.push(res.data)
+    });
   }
   console.log(urlList);
   setHashUrl(urlList);
