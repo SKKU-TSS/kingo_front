@@ -44,8 +44,7 @@ function extractUrlList(ret, setHashUrl){
   setHashUrl(urlList);
 }
 
-
-export default function CheckTransactions() {
+const CheckTransactions = () => {
   // 나의 트랜잭션들이 속한 _hash, _hashreceipt, ipfsurl를 확인할 수 있도록 한 컴포넌트
   // ipfs상에 올라간 tranasaction들을 볼 수 있음.
   const [hashUrl, setHashUrl] = useState([]);
@@ -67,6 +66,8 @@ export default function CheckTransactions() {
       </Table>);
 
 }
+
+export default CheckTransactions;
 
 const TransactionHead = () =>{
 
@@ -97,26 +98,45 @@ const TransactionList = ({value, hashUrl}) =>{
 
 const TransactionItem = ({value, hashUrl}) =>{
 
+
+  return(<tr>
+    <ItemIndex index = {value.index}/>
+    <ItemHash hash = {value.hash}/>
+    <ItemReceipt receipt = {value.receipt}/>
+    <ItemHashUrl hashUrl={hashUrl}/>
+  </tr>);
+};
+
+const ItemIndex = ({index}) =>{
+
+  return(<Td>
+    <HStack justifyContent="center">
+      <Text>{index}</Text>
+    </HStack>
+  </Td>);
+};
+
+const ItemHash = ({hash}) =>
+{
+  return(<Td>{hash}</Td>);
+};
+
+const ItemReceipt = ({receipt}) =>{
   const getUrl = (receipt) => {
     return `https://baobab.scope.klaytn.com/tx/${receipt}?tabId=internalTx`;
   };
 
-  return(<tr>
-    <Td>
-      <HStack justifyContent="center">
-        <Text>{value.index}</Text>
-      </HStack>
-    </Td>
-    <Td>{value.hash}</Td>
-    <Td>
-      <Button size="xs" as={Link} isExternal href={getUrl(value.receipt)}>
-        {value.receipt}
-      </Button>
-    </Td>
-    <Td>
-      <Button size="xs" as={Link} isExternal href={hashUrl}>
-        {hashUrl}
-      </Button>
-    </Td>
-  </tr>)
-}
+  return(<Td>
+    <Button size="xs" as={Link} isExternal href={getUrl(receipt)}>
+      {receipt}
+    </Button>
+  </Td>);
+};
+
+const ItemHashUrl = ({hashUrl}) =>{
+  return(<Td>
+    <Button size="xs" as={Link} isExternal href={hashUrl}>
+      {hashUrl}
+    </Button>
+  </Td>);
+};
