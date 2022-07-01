@@ -16,31 +16,8 @@ function Transaction() {
       </Text>
 
       {/* graph */}
-      {/* 
-            <VStack
-                w="full"
-                backgroundColor="white"
-                borderRadius="5px"
-                p={5}
-                marginTop={5}
-            >
-                <HStack justifyContent="space-between" w="full">
-                    <Text color="#4318FF" fontWeight={700} fontSize="lg">
-                        Latest Blocks
-                    </Text>
-                    <Box
-                        as="button"
-                        backgroundColor="#4318FF"
-                        color="white"
-                        borderRadius="3px"
-                        width="60px"
-                        fontWeight="bold"
-                    >
-                        + More
-                    </Box>
-                </HStack>
-                <LatestBlock />
-            </VStack> */}
+      {/*  <LastBlock/>
+             */}
 
       <VStack
         w="full"
@@ -63,10 +40,10 @@ function Transaction() {
             onClick={onOpenModal}
           >
             + More
-            {modalOn ? <LatestTransactions /> : ""}
+            
           </Box>
         </HStack>
-
+        {modalOn ? <LatestTransactions /> : ""}
         <LatestTransactions />
       </VStack>
       <VStack
@@ -89,6 +66,34 @@ function Transaction() {
       </VStack>
     </Flex>
   );
+}
+
+const LastBlock = () =>{
+
+  return(<VStack
+    w="full"
+    backgroundColor="white"
+    borderRadius="5px"
+    p={5}
+    marginTop={5}
+>
+    <HStack justifyContent="space-between" w="full">
+        <Text color="#4318FF" fontWeight={700} fontSize="lg">
+            Latest Blocks
+        </Text>
+        <Box
+            as="button"
+            backgroundColor="#4318FF"
+            color="white"
+            borderRadius="3px"
+            width="60px"
+            fontWeight="bold"
+        >
+            + More
+        </Box>
+    </HStack>
+    {/*<LatestBlock />*/}
+</VStack>)
 }
 
 export default Transaction;
