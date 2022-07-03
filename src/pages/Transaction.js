@@ -2,6 +2,9 @@ import { Flex, HStack, Text, VStack, Box } from "@chakra-ui/layout";
 import LatestTransactions from "../components/transaction/CheckTransactions";
 import { useState } from "react";
 import Clock from "../components/transaction/Clock";
+
+
+const TEXT_TITLE = 'Transaction 현황';
 function Transaction() {
   // 내 트랜잭션들이 ipfs 에 올라갔는지 확인할 수 있는 페이지
   const [modalOn, setModalOn] = useState(false);
@@ -11,53 +14,78 @@ function Transaction() {
   };
   return (
     <Flex m={10} flexDirection="column" w="full">
-      <Text fontSize="3xl" fontWeight="700">
-        Transaction 현황
-      </Text>
-
+      <ViewTitle/>
       {/* graph */}
-      {/*  <LastBlock/>
-             */}
-
-      <VStack
-        w="full"
-        backgroundColor="white"
-        borderRadius="5px"
-        p={5}
-        marginTop={5}
-      >
-        <HStack justifyContent="space-between" w="full">
-          <Text color="#4318FF" fontWeight={700} fontSize="lg">
-            Latest Transaction
-          </Text>
-          <BtnMore onOpenModal={onOpenModal}/>
-        </HStack>
-        {modalOn ? <LatestTransactions /> : ""}
-        <LatestTransactions />
-      </VStack>
-      <VStack
-        w="half"
-        backgroundColor="white"
-        borderRadius="5px"
-        p={5}
-        marginTop={5}
-      >
-        <HStack justifyContent="center" w="full">
-          <Text color="#4318FF" fontWeight={700} fontSize="2xl">
-            다음 Transaction 까지
-          </Text>
-        </HStack>
-        <HStack justifyContent="center" w="full">
-          <Text color="#4318FF" fontWeight={700} fontSize="9xl">
-            <Clock />
-          </Text>
-        </HStack>
-      </VStack>
+        <LastBlock/>
+             
+      <TransactionView onOpenModal={onOpenModal} modalOn={modalOn}/>
     </Flex>
   );
 }
 
-const BtnMore = ({onOpenModal}) =>{
+const ViewTitle = () =>{
+  return(<Text fontSize="3xl" fontWeight="700">
+  {TEXT_TITLE}
+</Text>)
+}
+
+const TransactionView = ({onOpenModal, modalOn})=>{
+
+  return(<VStack
+    w="full"
+    backgroundColor="white"
+    borderRadius="5px"
+    p={5}
+    marginTop={5}
+  >
+    <LastTransactionHead onOpenModal={onOpenModal}/>
+    {modalOn ? <LatestTransactions /> : ""}
+    <LatestTransactions />
+    <TimerNext/>
+  </VStack>);
+}
+
+const LastTransactionHead = ({onOpenModal}) =>{
+  return(<HStack justifyContent="space-between" w="full">
+  <Text color="#4318FF" fontWeight={700} fontSize="lg">
+    Latest Transaction
+  </Text>
+  <BtnMore onClick={onOpenModal}/>
+</HStack>);
+}
+
+const TimerNext = () => {
+
+  const style = {
+    width : "50%",
+    backgroundColor : "white",
+    borderRadius : "5px"
+  }
+
+  return(<VStack style = {style} p={5} marginTop={5}  >
+    <TimerTitle/>
+    <TimerField/>
+  </VStack>);
+}
+
+const TimerTitle = () =>{
+  return(
+    <HStack justifyContent="center" w="full">
+      <Text color="#4318FF" fontWeight={700} fontSize="2xl">
+        다음 Transaction 까지
+      </Text>
+    </HStack>
+  );
+}
+
+const TimerField = () =>{
+  return(<HStack justifyContent="center" w="full">
+  <Text color="#4318FF" fontWeight={700} fontSize="9xl">
+    <Clock />
+  </Text>
+</HStack>);
+}
+const BtnMore = ({onClick}) =>{
 
   return(<Box
     as="button"
@@ -66,7 +94,7 @@ const BtnMore = ({onOpenModal}) =>{
     borderRadius="3px"
     width="60px"
     fontWeight="bold"
-    onClick={onOpenModal}
+    onClick={onClick}
   >
     + More
     
@@ -86,16 +114,7 @@ const LastBlock = () =>{
         <Text color="#4318FF" fontWeight={700} fontSize="lg">
             Latest Blocks
         </Text>
-        <Box
-            as="button"
-            backgroundColor="#4318FF"
-            color="white"
-            borderRadius="3px"
-            width="60px"
-            fontWeight="bold"
-        >
-            + More
-        </Box>
+        <BtnMore/>
     </HStack>
     {/*<LatestBlock />*/}
 </VStack>)
