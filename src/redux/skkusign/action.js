@@ -1,6 +1,6 @@
 import { SKKU_LOGIN } from "./const"
 
-const actionLogin = (username, psword) =>{
+const actionSkkuLogin = (username, psword) =>{
     return {
         type : SKKU_LOGIN,
         username : username,
@@ -11,5 +11,5 @@ const actionLogin = (username, psword) =>{
 
 
 export {
-    actionLogin
+    actionSkkuLogin
 };

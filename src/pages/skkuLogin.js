@@ -1,12 +1,22 @@
-import { HStack, Input, VStack, Text } from "@chakra-ui/react"
+import { HStack, Input, VStack, Text, Button, Box } from "@chakra-ui/react"
+import { useCallback, useState } from "react"
+import { actionSkkuLogin } from "../redux/skkusign/action"
+import { connect, useDispatch } from 'react-redux'
 
 const SKKULoginPage = () =>{
 
+    const dispatch = useDispatch();
+
+    const [form, setForm] = useState({id:"", pw : ""})
+
+    const skkuLogin = ()=>{
+        dispatch(actionSkkuLogin(form.id, form.pw));
+    }
 
     const fieldStyle = {
         borderWidth : "1px",
         borderRadius : "4px",
-        borderColor : "black",
+        borderColor : "#AFAFAF",
         backgroundColor : "white",
        
         width : "400px"
@@ -14,15 +24,30 @@ const SKKULoginPage = () =>{
 
 
 
+
+
+    const updateForm = (title, value)=>{
+        if(title === 'ID') 
+            setForm({...form,
+                pw : value
+            });
+        else
+            setForm({...form,
+                id : value
+            });
+        
+    }
+
+
     return(<VStack width="100%">
         <Header/>
         <VStack style={fieldStyle} spacing="3" p="2">
-            <TextField title = "ID" placeholder="username"/>
-            <TextField title = "PW" placeholder="password"/>
+            <TextField title = "ID" placeholder="username" setForm = {updateForm}/>
+            <TextField title = "PW" placeholder="password" setForm = {updateForm}/>
             
             
         </VStack>
-        <BtLogin/>
+        <BtLogin onClick={skkuLogin}/>
     </VStack>)
 }
 
@@ -30,29 +55,43 @@ const SKKULoginPage = () =>{
 const Header = ()=>{
 
     const url = "https://www.skku.edu/_res/skku/img/skku_s.png"
-    const style = {
-        width : "200px",
-        height : "200px",
-        backgroundSize : "cover",
-        backgroundImage : `url('${url}')`
-    }
-    return(<div style = {style}></div>)
+
+
+
+    return(<Box
+        bgImage={`url('${url}')`}
+        bgPosition="center"
+        bgRepeat="no-repeat"
+        height='200px'
+        width = '200px'
+        bgSize = 'cover'
+      />)
 }
 
 
-const TextField = ({title,placeholder, onChange}) =>{
+const TextField = ({title,placeholder, setForm, onChange}) =>{
+
+    
+    const setValue = useCallback((value)=>{
+        setForm(title,value);
+    },[])
+
     return(<HStack width="100%" >
         <Text width = "10%" marginStart = "2" border="0px">
             {title}
         </Text>
-        <Input variant='unstyled' placeholder={placeholder} size='xs'/>
+        <Input variant='unstyled' placeholder={placeholder} size='xs' onChange={(event)=>setValue(event.target.value)}/>
     </HStack>)
 }
 
 const BtLogin = ({onClick})=>{
-    return(<div backgroundColor = "black" color="white" onClick={onClick} >
-        Sign in
-    </div>)
+    return(<Button colorScheme='teal' onClick={onClick}
+    fontWeight='400'>
+    SIGN IN
+  </Button>)
 }
 
-export default SKKULoginPage
+
+
+
+export default SKKULoginPage;
