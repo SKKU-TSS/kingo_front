@@ -6,6 +6,7 @@ import DashBoard from "./pages/DashBoard";
 import MyPoint from "./pages/MyPoint";
 import Transaction from "./pages/Transaction";
 import Login from "./pages/Login";
+import SKKULoginPage from "./pages/skkuLogin.js";
 import { useWeb3React } from "@web3-react/core";
 
 const AppWrap = styled.div`
@@ -25,10 +26,11 @@ function App() {
           <BrowserRouter>
             {active ? <Redirect to="/dashboard" /> : <Redirect to="/" />}
             {active ? <NavBar /> : <></>}
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" component={SKKULoginPage} />
             <Route exact path="/dashboard" component={DashBoard} />
             <Route exact path="/my-point" component={MyPoint} />
             <Route exact path="/check-transactions" component={Transaction} />
+            
           </BrowserRouter>
         </Flex>
       </Container>
