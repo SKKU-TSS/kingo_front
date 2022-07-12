@@ -1,6 +1,7 @@
 import { useWeb3React } from "@web3-react/core";
 import { injectedConnector } from "../../connector";
-import { Box, Text, VStack, Link } from "@chakra-ui/react";
+import { Button, Text, VStack, Link } from "@chakra-ui/react";
+import { SKKUBLUE, SKKUGREEN } from "../../colors";
 
 const TEXT_WELCOME = "Kingo Chain에 오신 것을 환영합니다.";
 const TEXT_INTRODUCE = "서비스 이용을 위해 메타마스크 로그인을 해주세요.";
@@ -46,7 +47,7 @@ const LoginSub = () =>{
 
 const BtnInstall = () => {
 
-  return (<Link color="blue" href="https://metamask.io/" isExternal>
+  return (<Link color={SKKUBLUE} href="https://metamask.io/" isExternal>
   {TEXT_INSTALL_METAMASK}
 </Link>);
 };
@@ -57,23 +58,17 @@ const BtnConnect = ({onClick}) => {
     height : "40px",
     width : "200px",
     borderRadius : "20px",
-    backgroundColor : "#4318FF",
     color : "white",
     fontSize : "14px",
     fontWeight : "bold"
   };
 
 
-  return (<Box
-    as="button"
-    onClick={onClick}
-
-    borderRadius={20}
-
-    style = {style}
-  >
-    <Text>{TEXT_CONNECT_WALLET}</Text>
-  </Box>)
+  return (<Button colorScheme='green' variant='solid' borderRadius="20px" style = {style}
+    onClick = {onClick}
+    >
+  {TEXT_CONNECT_WALLET}
+</Button>)
 }
 
 
