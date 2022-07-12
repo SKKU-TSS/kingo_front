@@ -1,4 +1,4 @@
 const SKKUGREEN = '#8dc73f'
-
-
-export {SKKUGREEN};
+const SKKUORNAGE = '#ff6c0f'
+const SKKUBLUE = 'r1=#003e74'
+export {SKKUGREEN, SKKUORNAGE, SKKUBLUE};
