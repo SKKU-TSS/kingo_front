@@ -8,10 +8,7 @@ const Table = styled.table`
   table-layout : fixed;
 `;
 
-const Td = styled.td`
-  text-align: center;
-  padding: 5px;
-`;
+
 
 const Th = styled.th`
   font-weight: 800;
@@ -20,16 +17,7 @@ const Th = styled.th`
   border-bottom: 2px solid #4318ff;
 `;
 
-const Icon = styled.img`
-  src: ${(props) => props.src};
-  width: 20px;
-  margin-left: 10px;
-`;
 
-const Time = styled.td`
-  color: #aeb4c4;
-  text-align: center;
-`;
 
 const TransactionTable = ({type, transData}) => {
     

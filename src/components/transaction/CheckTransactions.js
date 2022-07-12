@@ -50,7 +50,6 @@ const CheckTransactions = () => {
   // ipfs상에 올라간 tranasaction들을 볼 수 있음.
   const [hashUrl, setHashUrl] = useState([]);
   const { account } = useWeb3React();
-  
   const [value, setValue] = useState([]);
 
   useEffect(() => {
