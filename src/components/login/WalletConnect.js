@@ -20,7 +20,7 @@ function WalletConnect() {
   };
 
   return (
-    <VStack w="full" h="100vh" align="center" justify="center">
+    <VStack w="full" align="center" justify="center">
       <VStack bg="white" p={10} borderRadius={20}>
         <LoginTitle/>
         <LoginSub/>
