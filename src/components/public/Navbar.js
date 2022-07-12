@@ -6,6 +6,7 @@ import dashboard from "../../assets/dashboard.svg";
 import transactions from "../../assets/transactions.svg";
 import activeTransactions from "../../assets/activeTransactions.svg";
 import { Link as RouterLink } from "react-router-dom";
+import { SKKUBLUE } from "../../colors";
 
 
 const INDEX_DASHBOARD = 0;
@@ -51,7 +52,7 @@ function NavBar() {
 const NavTitle = () =>{
 
   return(<HStack>
-    <Text fontSize="xl" fontWeight="900" color="#4318FF">
+    <Text fontSize="xl" fontWeight="900" color={SKKUBLUE}>
       KingoChain
     </Text>
   </HStack>);
@@ -63,7 +64,7 @@ const BtnNavigation = ({indexState, btnIndex, nav, icon, children}) =>{
   const [_icon, _activeIcon] = icon || [undefined, undefined];
   const styleHstack = {
     width : "130px",
-    backgroundColor : index === btnIndex ? "#4318FF" : "#ffffff",
+    backgroundColor : index === btnIndex ? SKKUBLUE : "#ffffff",
     borderRadius : "5px"
   };
   return(<Link onClick={() => setIndex(btnIndex)} as={RouterLink} to={nav}>
