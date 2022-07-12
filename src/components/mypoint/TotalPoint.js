@@ -2,6 +2,7 @@ import { Text, HStack, Box, VStack } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
+import { SKKUBLUE } from "../../colors";
 
 
 const TEXT_TOTAL_TITLE = "총 보유 포인트"
@@ -60,7 +61,7 @@ const TotalPoint = () => {
 const TotalPointView = ({children}) =>{
   const style = {
     justifyContent :"space-between",
-    backgroundImage : "linear-gradient(#532DFB,#868CFF)",
+    backgroundImage : `linear-gradient(#532DFB,${SKKUBLUE})`,
     width : "100%",
     height : "204px",
     borderRadius : "15px"

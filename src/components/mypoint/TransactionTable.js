@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SKKUBLUE } from "../../colors";
 import SendItem from './SendItem'
 
 
@@ -12,9 +13,9 @@ const Table = styled.table`
 
 const Th = styled.th`
   font-weight: 800;
-  color: #4318ff;
+  color: ${SKKUBLUE};
   text-align: center;
-  border-bottom: 2px solid #4318ff;
+  border-bottom: 2px solid ${SKKUBLUE};
 `;
 
 

@@ -1,0 +1,13 @@
+import { Button } from "@chakra-ui/react";
+import { SKKUBLUE } from "../../colors";
+
+
+const IndexButton = ({title, index, num, setindex})=>{
+
+    return(<Button 
+    >
+      fefe
+    </Button>)
+  }
+  
+export default IndexButton;
