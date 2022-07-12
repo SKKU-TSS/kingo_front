@@ -58,11 +58,11 @@ async function bindData(account, setSendData, setIpfs)
    
    setSendData([{
     from : "2020",
-    to : "2021",
-    type : "mol",
-    value : "lu",
-    date : "hehehehe",
-    hash : "hui",
+    to : "홍길동",
+    type : "",
+    value : "1,842",
+    date : "2021. 07. 12",
+    hash : "hashid",
    }])
    
   }, []);

@@ -3,6 +3,9 @@ import { HStack, Text, VStack, Flex } from "@chakra-ui/layout";
 import { Button, Link } from "@chakra-ui/react";
 import styled from "styled-components";
 import { useState } from "react";
+import { SKKUBLUE, SKKUBLUE_100, SKKUORANGE_100 } from "../../colors";
+
+
 
 
 const Td = styled.td`
@@ -25,7 +28,7 @@ const SendItem = ({transData, type}) =>{
 
     return(<tr
       onPointerEnter={()=>setFocus(true)} onPointerLeave = {()=>setFocus(false)}
-      bgColor = {focus && "#bbbbee" }
+      bgColor = {focus &&SKKUBLUE_100 }
     >
       <SourceView  width = {width + '%'} icon={kakaoTalk} text={"KakaoPay"}/>
       <TextView width = {width + '%'}title = "Date" content = {transData.date} focus = {focus}/>
@@ -69,7 +72,7 @@ const SendItem = ({transData, type}) =>{
   const BtnHash = ({link, text, focus}) =>{
 
     return(<Td>
-      <Button colorScheme='blue' size="md" variant = {focus ? 'solid': 'outline'} as={link} isExternal>
+      <Button colorScheme='green' size="md" variant = {focus ? 'solid': 'outline'} as={link} isExternal>
         Open Hash
       </Button>
     </Td>);
