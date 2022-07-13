@@ -89,7 +89,7 @@ const TransItem = ({name, value, date}) =>{
           
       </Flex>
 
-      <Text fontSize="12px" lineHeight = "25px" color="#2B2B2B">
+      <Text fontSize="12px" lineHeight = "25px" color="#2B2B2B" opacity={0.4}>
         {date}
       </Text>
     </VStack>
