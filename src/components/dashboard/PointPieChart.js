@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
-import { SKKUBLUE } from "../../colors";
+import { SKKUBLUE, SKKUBLUE_100 } from "../../colors";
 
 const TEXT_POINT_INFO = 'Pie Chart';
 
@@ -41,14 +41,14 @@ function PointStatus() {
   }
   return (
     <VStack
-      style = {style}      p={10}      align="flex-start"      m={3}    >
-       <VStack spacing = {0}>
+      style = {style}      p={8}      align="flex-start"      m={3}    >
+       <VStack spacing = {0} p={2}>
             <Text 
               fontSize = '24px'
             >{TEXT_POINT_INFO}</Text>
             <Box backgroundColor={SKKUBLUE} borderRadius='4px' width='100%' height='4px'/>
           </VStack>
-      <VStack spacing={10} w="full">
+      <VStack  w="full">
         <PointItem title = "Service A" point = {pointArr[0]}/>
         <PointItem title = "Service B" point = {pointArr[1]}/>
         <PointItem title = "Service C" point = {pointArr[2]}/>
@@ -59,7 +59,18 @@ function PointStatus() {
 }
 
 const PointItem = ({title, point}) =>{
-  return(<HStack w="full" justify="space-between">
+
+  const [focus, setFocus] = useState(false)
+
+
+  return(<HStack w="full" justify="space-between"
+  height = '50px'
+  borderRadius = '10px'
+  p = {2}
+  bgColor = {focus && SKKUBLUE_100}
+  onPointerEnter = {()=>setFocus(true)}
+  onPointerLeave = {()=>setFocus(false)}
+  >
   <Text fontSize="lg">{title}</Text>
   <Text fontSize="lg">{point}</Text>
 </HStack>);

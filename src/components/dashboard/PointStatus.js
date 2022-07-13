@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
-import { SKKUORNAGE } from "../../colors";
+import { SKKUORANGE_100, SKKUORNAGE } from "../../colors";
 
 const TEXT_POINT_INFO = '포인트 현황';
 
@@ -45,9 +45,9 @@ const PointStatus = () => {
   
   return (
     <VStack
-      style = {style}      p={10}      align="flex-start"      m={3}    >
-      <Balance/>
-      <VStack spacing={10} w="full">
+      style = {style}      p={8}      align="flex-start"      m={3}    >
+      <Balance />
+      <VStack w="full">
         
         <PointItem title = "온라인 명륜당" point = {pointArr[0]}/>
         <PointItem title = "킹고인과의 만남" point = {pointArr[1]}/>
@@ -61,7 +61,7 @@ const PointStatus = () => {
 
 const Balance = () =>{
 
-  return(<VStack spacing={0}>
+  return(<VStack spacing={0}  p = {2}>
     <Text fontSize = '2xl'>Balance</Text>
     <Box backgroundColor={SKKUORNAGE} borderRadius='4px' width='100%' height='4px'/>
   </VStack>)
@@ -69,12 +69,21 @@ const Balance = () =>{
 
 const PointItem = ({title, point}) =>{
 
+  const [focus, setFocus] = useState(false);
+
+
   const styleContainer = {
     width : "100%",
-    justifyContent : "space-between"
+    justifyContent : "space-between",
+    borderRadius : "10px",
+    backgroundColor : focus && SKKUORANGE_100,
+    height : '50px'
   }
 
-  return(<HStack style = {styleContainer}>
+  return(<HStack style = {styleContainer} p={2}
+    onPointerEnter = {()=>setFocus(true)}
+    onPointerLeave = {()=>setFocus(false)}
+  >
   <Text fontSize="lg">{title}</Text>
   <Text fontSize="lg">{`${point || 0}포인트`}</Text>
 </HStack>)
