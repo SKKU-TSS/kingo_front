@@ -1,10 +1,11 @@
-import { VStack, HStack, Text, useMediaQuery } from "@chakra-ui/react";
+import { VStack, HStack, Text, useMediaQuery, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
+import { SKKUBLUE } from "../../colors";
 
-const TEXT_POINT_INFO = '포인트 현황';
+const TEXT_POINT_INFO = 'Pie Chart';
 
 
 function PointStatus() {
@@ -41,7 +42,12 @@ function PointStatus() {
   return (
     <VStack
       style = {style}      p={10}      align="flex-start"      m={3}    >
-      <Text fontSize="3xl" fontWeight="700">{TEXT_POINT_INFO}</Text>
+       <VStack spacing = {0}>
+            <Text 
+              fontSize = '24px'
+            >{TEXT_POINT_INFO}</Text>
+            <Box backgroundColor={SKKUBLUE} borderRadius='4px' width='100%' height='4px'/>
+          </VStack>
       <VStack spacing={10} w="full">
         <PointItem title = "Service A" point = {pointArr[0]}/>
         <PointItem title = "Service B" point = {pointArr[1]}/>

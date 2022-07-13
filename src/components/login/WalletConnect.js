@@ -3,7 +3,7 @@ import { injectedConnector } from "../../connector";
 import { Button, Text, VStack, Link } from "@chakra-ui/react";
 import { SKKUBLUE, SKKUGREEN } from "../../colors";
 
-const TEXT_WELCOME = "Kingo Chain에 오신 것을 환영합니다.";
+const TEXT_WELCOME = "KingoKoin에 오신 것을 환영합니다.";
 const TEXT_INTRODUCE = "서비스 이용을 위해 메타마스크 로그인을 해주세요.";
 const TEXT_INSTALL_METAMASK = "메타마스크 설치하기";
 const TEXT_CONNECT_WALLET = '지갑 연결하기';

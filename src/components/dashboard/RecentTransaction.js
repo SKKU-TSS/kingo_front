@@ -2,7 +2,7 @@ import { VStack, HStack, Text, useMediaQuery, Flex, Box, Spacer } from "@chakra-
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
-import { SKKUGREEN_100 } from "../../colors";
+import { SKKUGREEN, SKKUGREEN_100 } from "../../colors";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
 const TEXT_POINT_INFO = '포인트 현황';
@@ -50,9 +50,13 @@ const RecentTransaction= () => {
   
         <VStack  style = {style} paddingTop={10} align="flex-start"   m={3}>
 
-          <Text paddingLeft={10}
-            fontSize = '24px'
-          >Recent Transactions</Text>
+          <VStack paddingLeft={10} spacing={0}>
+            <Text 
+              fontSize = '24px'
+            >Recent Transactions</Text>
+            <Box backgroundColor={SKKUGREEN} borderRadius='4px' width='100%' height='4px'/>
+          </VStack>
+          
       {
         items.map(item=>{
           return <TransItem name = {item.name} value = {item.value} date = {item.date}/>

@@ -53,7 +53,7 @@ const NavTitle = () =>{
 
   return(<HStack>
     <Text fontSize="xl" fontWeight="900" color={SKKUBLUE}>
-      KingoChain
+      KingoKoin
     </Text>
   </HStack>);
 }

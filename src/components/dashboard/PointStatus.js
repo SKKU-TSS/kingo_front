@@ -1,8 +1,9 @@
-import { VStack, HStack, Text, useMediaQuery } from "@chakra-ui/react";
+import { VStack, HStack, Text, useMediaQuery, Box } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
+import { SKKUORNAGE } from "../../colors";
 
 const TEXT_POINT_INFO = '포인트 현황';
 
@@ -45,20 +46,26 @@ const PointStatus = () => {
   return (
     <VStack
       style = {style}      p={10}      align="flex-start"      m={3}    >
-      <Text fontSize="3xl" fontWeight="700">
-        {TEXT_POINT_INFO}
-      </Text>
+      <Balance/>
       <VStack spacing={10} w="full">
-        <PointItem title = "Service A" point = {pointArr[0]}/>
-        <PointItem title = "Service B" point = {pointArr[1]}/>
-        <PointItem title = "Service C" point = {pointArr[2]}/>
-        <PointItem title = "Service D" point = {pointArr[3]}/>
+        
+        <PointItem title = "온라인 명륜당" point = {pointArr[0]}/>
+        <PointItem title = "킹고인과의 만남" point = {pointArr[1]}/>
+        <PointItem title = "해오름제" point = {pointArr[2]}/>
+        <PointItem title = "멘토링" point = {pointArr[3]}/>
 
       </VStack>
     </VStack>
   );
 }
 
+const Balance = () =>{
+
+  return(<VStack spacing={0}>
+    <Text fontSize = '2xl'>Balance</Text>
+    <Box backgroundColor={SKKUORNAGE} borderRadius='4px' width='100%' height='4px'/>
+  </VStack>)
+}
 
 const PointItem = ({title, point}) =>{
 
@@ -69,7 +76,7 @@ const PointItem = ({title, point}) =>{
 
   return(<HStack style = {styleContainer}>
   <Text fontSize="lg">{title}</Text>
-  <Text fontSize="lg">{point}</Text>
+  <Text fontSize="lg">{`${point || 0}포인트`}</Text>
 </HStack>)
 }
 
