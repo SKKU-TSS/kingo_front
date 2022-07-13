@@ -10,6 +10,7 @@ import {
   import PointStatus from "../components/dashboard/PointStatus";
   import PointPieChart from "../components/dashboard/PointPieChart";
   import AccountInfo from "../components/dashboard/AccountInfo";
+import RecentTransaction from "../components/dashboard/RecentTransaction";
   
   function DashBoard() {
     // 대시보드 페이지
@@ -20,7 +21,7 @@ import {
     return (
         <FlexContainer>
           <TotalPoint />
-          <PointStatus />
+          <RecentTransaction />
           <AccountInfo />
           <PointPieChart />
           <PointStatus />
