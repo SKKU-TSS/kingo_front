@@ -7,6 +7,7 @@ import { Button, Link } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import getHash from "../../remote/GetHash";
 import getHashResult from "../../remote/GetHashResult";
+import { SKKUBLUE } from "../../colors";
 const Table = styled.table`
   width: 100%;
 `;
@@ -18,9 +19,9 @@ const Td = styled.td`
 
 const Th = styled.th`
   font-weight: 800;
-  color: #4318ff;
+  color: ${SKKUBLUE};
   text-align: center;
-  border-bottom: 2px solid #4318ff;
+  border-bottom: 2px solid ${SKKUBLUE};
 `;
 
 const Icon = styled.img`

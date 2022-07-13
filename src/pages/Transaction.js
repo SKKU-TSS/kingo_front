@@ -2,6 +2,7 @@ import { Flex, HStack, Text, VStack, Box } from "@chakra-ui/layout";
 import LatestTransactions from "../components/transaction/CheckTransactions";
 import { useState } from "react";
 import Clock from "../components/transaction/Clock";
+import { SKKUBLUE } from "../colors";
 
 
 const TEXT_TITLE = 'Transaction 현황';
@@ -47,7 +48,7 @@ const TransactionView = ({onOpenModal, modalOn})=>{
 
 const LastTransactionHead = ({onOpenModal}) =>{
   return(<HStack justifyContent="space-between" w="full">
-  <Text color="#4318FF" fontWeight={700} fontSize="lg">
+  <Text color={SKKUBLUE} fontWeight={700} fontSize="lg">
     Latest Transaction
   </Text>
   <BtnMore onClick={onOpenModal}/>
@@ -71,7 +72,7 @@ const TimerNext = () => {
 const TimerTitle = () =>{
   return(
     <HStack justifyContent="center" w="full">
-      <Text color="#4318FF" fontWeight={700} fontSize="2xl">
+      <Text color={SKKUBLUE} fontWeight={700} fontSize="2xl">
         다음 Transaction 까지
       </Text>
     </HStack>
@@ -80,7 +81,7 @@ const TimerTitle = () =>{
 
 const TimerField = () =>{
   return(<HStack justifyContent="center" w="full">
-  <Text color="#4318FF" fontWeight={700} fontSize="9xl">
+  <Text color={SKKUBLUE} fontWeight={700} fontSize="9xl">
     <Clock />
   </Text>
 </HStack>);
@@ -89,7 +90,7 @@ const BtnMore = ({onClick}) =>{
 
   return(<Box
     as="button"
-    backgroundColor="#4318FF"
+    backgroundColor={SKKUBLUE}
     color="white"
     borderRadius="3px"
     width="60px"
@@ -111,7 +112,7 @@ const LastBlock = () =>{
     marginTop={5}
 >
     <HStack justifyContent="space-between" w="full">
-        <Text color="#4318FF" fontWeight={700} fontSize="lg">
+        <Text color={SKKUBLUE} fontWeight={700} fontSize="lg">
             Latest Blocks
         </Text>
         <BtnMore/>
