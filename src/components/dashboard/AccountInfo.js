@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import { m } from "framer-motion";
+import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
 const TEXT_MY_ACCOUNT = '내 지갑 주소 : ';
 
@@ -31,7 +32,7 @@ function AccountInfo() {
 
   const styleVstack = {
     borderRadius : "15px",
-    width : isLessThan1195 ? "100%" : "45%",
+    width : isLessThan1195 ? "100%" : DASHBAORD_WIDTH,
     height : "355px",
     justifyContent : "center",
     spacing : "5",

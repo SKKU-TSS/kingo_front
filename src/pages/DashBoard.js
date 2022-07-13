@@ -67,3 +67,10 @@ import RecentTransaction from "../components/dashboard/RecentTransaction";
 
   
   export default DashBoard;
+
+
+const DASHBAORD_WIDTH = "47%"
+
+  export {
+     DASHBAORD_WIDTH
+  }

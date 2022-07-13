@@ -1,8 +1,8 @@
-import { Text, HStack, Box, VStack } from "@chakra-ui/react";
+import { Text, HStack, Box, VStack, useMediaQuery } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
-import { SKKUBLUE } from "../../colors";
+import { SKKUBLUE, SKKUGREEN } from "../../colors";
 
 
 const TEXT_TOTAL_TITLE = "총 보유 포인트"
@@ -59,10 +59,12 @@ const TotalPoint = () => {
 }
 
 const TotalPointView = ({children}) =>{
+  const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
   const style = {
     justifyContent :"space-between",
-    backgroundImage : `linear-gradient(#532DFB,${SKKUBLUE})`,
-    width : "100%",
+    background : SKKUGREEN,
+    //backgroundImage : `linear-gradient(#532DFB,${SKKUBLUE})`,
+    width : isLessThan1195 ? "100%" : "96%",
     height : "204px",
     borderRadius : "15px"
   }

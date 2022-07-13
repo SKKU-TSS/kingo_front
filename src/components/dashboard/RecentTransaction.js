@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { SKKUGREEN_100 } from "../../colors";
+import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
 const TEXT_POINT_INFO = '포인트 현황';
 
@@ -41,7 +42,7 @@ const RecentTransaction= () => {
     borderRadius : "15px",
     backgroundColor : "white",
     height:  "355px",
-    width : isLessThan1195 ? "100%" : "45%"
+    width : isLessThan1195 ? "100%" : DASHBAORD_WIDTH
   }
   
   
