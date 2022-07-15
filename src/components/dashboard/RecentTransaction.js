@@ -48,9 +48,9 @@ const RecentTransaction= () => {
   
   return (
   
-        <VStack  style = {style} paddingTop={10} align="flex-start"   m={3}>
+        <VStack  style = {style} p={8} align="flex-start"   m={3} spacing = {0}>
 
-          <VStack paddingLeft={10} spacing={0}>
+          <VStack p={2}>
             <Text 
               fontSize = '24px'
             >Recent Transactions</Text>
@@ -75,15 +75,16 @@ const TransItem = ({name, value, date}) =>{
 
 
   return(
-    <VStack align = 'left' width = "100%" spacing={0} paddingLeft ={10} paddingRight = {10}
+    <VStack align = 'left' width = "100%" spacing={0} p = {2} paddingTop = {1} paddingBottom = {1}
     bgColor = {focused && SKKUGREEN_100}
+    borderRadius ="10px"
       onPointerEnter ={()=>setFocus(true)}
       onPointerLeave = {()=>setFocus(false)}
     >
       <Flex 
         
         >
-          <Text fontSize="15px" lineHeight = "25px" fontFamily='noto-sans kr' >
+          <Text fontSize="15px" lineHeight = "25px" fontFamily='noto-sans kr' m={0}>
             {name}
           </Text>
           <Spacer/>

@@ -27,6 +27,7 @@ function App() {
             {active ? <Redirect to="/dashboard" /> : <Redirect to="/" />}
             {active ? <NavBar /> : <></>}
             <Route exact path="/" component={Login} />
+            <Route exact path="/login" component={SKKULoginPage}/>
             <Route exact path="/dashboard" component={DashBoard} />
             <Route exact path="/my-point" component={MyPoint} />
             <Route exact path="/check-transactions" component={Transaction} />

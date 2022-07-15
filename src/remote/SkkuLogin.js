@@ -2,7 +2,7 @@ import axios from "axios";
 
 const skkuLoginAccess = "https://login.skku.edu/loginAction"
 
-function skkuLogin(username, password, success, failed)
+function skkuLogin(username, success, failed)
 {
 
     axios({
@@ -21,7 +21,7 @@ function skkuLogin(username, password, success, failed)
         },
         data: {
             userid : username,
-            userpwd : password	
+        
         }
     }).then((response)=>{
 

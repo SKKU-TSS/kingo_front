@@ -14,7 +14,7 @@ const skkuReducer = async (state = initState, action) =>{
     switch(action.type)
     {
         case SKKU_LOGIN : 
-            await skkuLogin(action.username, action.psword,(response) =>{
+            await skkuLogin(action.username,(response) =>{
                 return response;
             }, (response) =>{
                 return state;

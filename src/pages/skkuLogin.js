@@ -10,7 +10,7 @@ const SKKULoginPage = () =>{
     const [form, setForm] = useState({id:"", pw : ""})
 
     const skkuLogin = ()=>{
-        dispatch(actionSkkuLogin(form.id, form.pw));
+        dispatch(actionSkkuLogin(form.id));
     }
 
     const fieldStyle = {
@@ -19,31 +19,25 @@ const SKKULoginPage = () =>{
         borderColor : "#AFAFAF",
         backgroundColor : "white",
        
-        width : "400px"
+        width : "300px"
     }
 
 
 
 
 
-    const updateForm = (title, value)=>{
-        if(title === 'ID') 
-            setForm({...form,
-                pw : value
-            });
-        else
-            setForm({...form,
+    const updateForm = (value)=>{
+        setForm({...form,
                 id : value
             });
         
     }
 
 
-    return(<VStack width="100%">
+    return(<VStack align="center" justifyContent="center" width="100%" spacing = {8}>
         <Header/>
         <VStack style={fieldStyle} spacing="3" p="2">
-            <TextField title = "ID" placeholder="username" setForm = {updateForm}/>
-            <TextField title = "PW" placeholder="password" setForm = {updateForm}/>
+            <TextField title = "통합 계정" placeholder="username" setForm = {updateForm} />
             
             
         </VStack>
@@ -77,17 +71,17 @@ const TextField = ({title,placeholder, setForm, onChange}) =>{
     },[])
 
     return(<HStack width="100%" >
-        <Text width = "10%" marginStart = "2" border="0px">
+        <Text width = "25%" marginStart = "2" border="0px" fontSize = "sm">
             {title}
         </Text>
-        <Input variant='unstyled' placeholder={placeholder} size='xs' onChange={(event)=>setValue(event.target.value)}/>
+        <Input variant='unstyled' placeholder={placeholder} size='xl' onChange={(event)=>setValue(event.target.value)}/>
     </HStack>)
 }
 
 const BtLogin = ({onClick})=>{
     return(<Button colorScheme='teal' onClick={onClick}
     fontWeight='400'>
-    SIGN IN
+    메일 보내기
   </Button>)
 }
 
