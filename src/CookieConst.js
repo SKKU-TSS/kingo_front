@@ -1,0 +1,5 @@
+const COOKIE_EMAIL = 'LOGIN_EMAIL';
+
+
+
+export { COOKIE_EMAIL };

@@ -1,7 +1,11 @@
-import { HStack, Input, VStack, Text, Button, Box } from "@chakra-ui/react"
-import { useCallback, useState } from "react"
+import { HStack, Input, VStack, Text, Button, Box, InputGroup, InputLeftAddon } from "@chakra-ui/react"
+import { useCallback, useEffect, useState } from "react"
 import { actionSkkuLogin } from "../redux/skkusign/action"
 import { connect, useDispatch } from 'react-redux'
+import { useCookies } from "react-cookie"
+import { COOKIE_EMAIL } from "../CookieConst"
+
+
 
 const SKKULoginPage = () =>{
 
@@ -23,24 +27,34 @@ const SKKULoginPage = () =>{
     }
 
 
+    const [emailCookie, setEmailCookie, removeEmailCookie] = useCookies(COOKIE_EMAIL);
 
-
-
-    const updateForm = (value)=>{
+    const updateForm = (title, value)=>{
+        setEmailCookie(COOKIE_EMAIL , value);
+        setSavedEmail(value);
         setForm({...form,
                 id : value
             });
         
     }
 
+    const [savedEmail, setSavedEmail] = useState(null);
+
+    useEffect(()=>{
+        
+        if(emailCookie !== undefined)
+        {
+            setSavedEmail(emailCookie.LOGIN_EMAIL);
+        }
+
+    },[]);
+    
+    //if(emailCookie !== undefined)
+    //    savedText = emailCookie.LOGIN_EMAIL
 
     return(<VStack align="center" justifyContent="center" width="100%" spacing = {8}>
         <Header/>
-        <VStack style={fieldStyle} spacing="3" p="2">
-            <TextField title = "통합 계정" placeholder="username" setForm = {updateForm} />
-            
-            
-        </VStack>
+        <TextField title = "성균인 계정" placeholder="user@skku.edu" savedText = {savedEmail} setForm = {updateForm} width = "300px" />
         <BtLogin onClick={skkuLogin}/>
     </VStack>)
 }
@@ -49,7 +63,6 @@ const SKKULoginPage = () =>{
 const Header = ()=>{
 
     const url = "https://www.skku.edu/_res/skku/img/skku_s.png"
-
 
 
     return(<Box
@@ -63,19 +76,32 @@ const Header = ()=>{
 }
 
 
-const TextField = ({title,placeholder, setForm, onChange}) =>{
+const TextField = ({title,placeholder, savedText, setForm, onChange}) =>{
+
+    const [textValue, setTextValue] = useState(null)
+
+    useEffect(()=>{
+        setTextValue(savedText);
+    });
+
 
     
     const setValue = useCallback((value)=>{
         setForm(title,value);
     },[])
 
-    return(<HStack width="100%" >
-        <Text width = "25%" marginStart = "2" border="0px" fontSize = "sm">
-            {title}
-        </Text>
-        <Input variant='unstyled' placeholder={placeholder} size='xl' onChange={(event)=>setValue(event.target.value)}/>
-    </HStack>)
+    return(
+    
+    <InputGroup width = '300px' size='sm'>
+        <InputLeftAddon children = {title}/>
+        <Input value={textValue} placeholder={placeholder} size='xl' background = 'white' onChange={(event)=>
+            {
+                setTextValue(event.target.value);
+            setValue(event.target.value);
+            }
+            }/>
+    </InputGroup>
+    )
 }
 
 const BtLogin = ({onClick})=>{
