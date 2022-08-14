@@ -8,6 +8,7 @@ import Transaction from "./pages/Transaction";
 import Login from "./pages/Login";
 import SKKULoginPage from "./pages/skkuLogin.js";
 import { useWeb3React } from "@web3-react/core";
+import { useEffect } from "react";
 
 const AppWrap = styled.div`
   font-size: 12px;
@@ -19,6 +20,11 @@ const AppWrap = styled.div`
 
 function App() {
   const { active } = useWeb3React();
+
+  useEffect(()=>{
+    document.title = 'Kingo Koin';
+  });
+
   return (
     <AppWrap>
       <Container maxW="full" bg="#E5E5E5" p={0}>
