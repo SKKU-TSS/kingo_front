@@ -5,6 +5,7 @@ import {
     Flex,
     Box,
     useMediaQuery,
+    cookieStorageManager,
   } from "@chakra-ui/react";
   import TotalPoint from "../components/mypoint/TotalPoint";
   import PointStatus from "../components/dashboard/PointStatus";
@@ -17,11 +18,69 @@ import {
   import AccountInfo from "../components/dashboard/AccountInfo";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import NavBar from "../components/public/Navbar";
+import { useWindowScroll } from "react-use";
+import { useCookies } from "react-cookie";
+import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
   
+
+
+
   function DashBoard() {
     // 대시보드 페이지
+
+    const [emailCookie, setEmailCookie, removeEmailCookie] = useCookies(COOKIE_EMAIL);
+    const [tokenCookie, setTokenCookie, removeTokenCookie] = useCookies(COOKIE_TOKEN);
+
+    const getRedirectData = ()=>{
+
+      console.log(window.location.href)
+      const path = window.location.href.split("/").pop();
+    
+      console.log(path)
+      const dict = path.split("?").pop().split("&");
+      
+      console.log(dict)
+    
+      const username = `${dict.filter((str)=>
+        str.includes("user")
+      )}`.split("=").pop()
+      const token = `${dict.filter((str)=>
+        str.includes("token")
+      )}`.split('=').pop()
+    
+    
+      
+      
+      
+      if(username !== undefined)
+      {
+        const name = `${username}`
+        if (name.length < 1)
+          return
+        console.log(`Username : ${username}`)
+
+        setEmailCookie(COOKIE_EMAIL,username)
+        
+      }
+    
+      if(token !== undefined)
+      {
+        const tk = `${token}`
+        if(tk.length < 1)
+          return
+        console.log(`token : ${token}`)
+        setTokenCookie(COOKIE_TOKEN,token)
+      }
+    
+      
+    }
+
    
+    getRedirectData()
+
     const { active } = useWeb3React();
+
+    
 
 
     return (
