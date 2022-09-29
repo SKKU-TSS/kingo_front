@@ -19,8 +19,9 @@ import {
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import NavBar from "../components/public/Navbar";
 import { useWindowScroll } from "react-use";
-import { useCookies } from "react-cookie";
+import { useCookies, Cookies } from "react-cookie";
 import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
+import { useEffect } from "react";
   
 
 
@@ -70,13 +71,26 @@ import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
           return
         console.log(`token : ${token}`)
         setTokenCookie(COOKIE_TOKEN,token)
+        window.location.href = "/dashboard"
       }
     
       
     }
 
    
-    getRedirectData()
+    useEffect(()=>{
+      getRedirectData()
+
+      let cookie = new Cookies()
+      let token = cookie.get(COOKIE_TOKEN)
+      if(token === undefined || token === null || token.length < 1)
+      {
+        window.location.href = "/login"
+      }
+
+      return ()=>{}
+    },[])
+    
 
     const { active } = useWeb3React();
 

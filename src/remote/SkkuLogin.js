@@ -8,9 +8,6 @@ function skkuLogin(username, success, failed)
     axios({
         url: `${BACKEND_URL}/api/auth/magicLogin`,
         method: 'post',
-        headers : {
-          
-        },
         data: {
             destination : username,
         

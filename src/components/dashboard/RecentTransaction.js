@@ -4,6 +4,13 @@ import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { SKKUGREEN, SKKUGREEN_100 } from "../../colors";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
+import { getRecentData } from "../../remote/PendingTransaction";
+
+
+function dateVisible(date){
+    
+  return `${date.substr(0,4)}년${date.substr(5,2)}월${date.substr(8,2)}일 ${date.substr(11,5)}`
+}
 
 const TEXT_POINT_INFO = '포인트 현황';
 
@@ -13,30 +20,28 @@ const RecentTransaction= () => {
 
     let isSubscribed = true;
 
-  
+    const getRecentList = ()=>{
+      getRecentData(
+        (response)=>{
+          console.log(response.result)
+            setItems(response.result)
+        },
+        (error)=>{
+        }
+      )
+
+    }
+    useEffect(() => {
+
+   
+    getRecentList()
+    return ()=>{}
+    },[]
+    )
     
-  const [items, setItems] = useState([
-    {
-      name : '온라인 명륜당 영상 시청',
-      value : 1050,
-      date : "2022. 07. 13"
-    },
-    {
-      name : '온라인 명륜당 게시글 작성',
-      value : 230,
-      date : "2022. 07. 13"
-    },
-    {
-      name : '실리콘벨리 졸업생 특강 참여',
-      value : 5600,
-      date : "2022. 07. 13"
-    },
-    {
-      name : '토익 강의 이용권',
-      value : -100,
-      date : "2022. 07. 13"
-    },
-  ])
+  const [items, setItems] = useState(
+    []
+    )
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
   const style = {
     borderRadius : "15px",
@@ -59,7 +64,7 @@ const RecentTransaction= () => {
           
       {
         items.map(item=>{
-          return <TransItem name = {item.name} value = {item.value} date = {item.date}/>
+          return <TransItem name = {item.description} value = {item.value} date = {dateVisible(item.date)}/>
         })
       }    
     </VStack>
