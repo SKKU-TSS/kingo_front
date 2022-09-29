@@ -4,6 +4,9 @@ import { actionSkkuLogin } from "../redux/skkusign/action"
 import { connect, useDispatch } from 'react-redux'
 import { useCookies } from "react-cookie"
 import { COOKIE_EMAIL } from "../CookieConst"
+import axios from "axios"
+import BACKEND_URL from "../ServerConst"
+import skkuLogin from "../remote/SkkuLogin"
 
 
 
@@ -13,8 +16,20 @@ const SKKULoginPage = () =>{
 
     const [form, setForm] = useState({id:"", pw : ""})
 
-    const skkuLogin = ()=>{
-        dispatch(actionSkkuLogin(form.id));
+    const login = ()=>{
+        skkuLogin(
+            form.id,
+            (response)=>{
+                alert("메일을 전송했습니다.")
+            },
+            (error)=>{
+                alert("메일 전송에 실패했습니다.")
+
+            }
+
+        )
+
+        //dispatch(actionSkkuLogin(form.id));
     }
 
     const fieldStyle = {
@@ -30,11 +45,13 @@ const SKKULoginPage = () =>{
     const [emailCookie, setEmailCookie, removeEmailCookie] = useCookies(COOKIE_EMAIL);
 
     const updateForm = (title, value)=>{
-        setEmailCookie(COOKIE_EMAIL , value);
+        //setEmailCookie(COOKIE_EMAIL , value);
         setSavedEmail(value);
         setForm({...form,
                 id : value
             });
+
+        
         
     }
 
@@ -55,7 +72,7 @@ const SKKULoginPage = () =>{
     return(<VStack align="center" justifyContent="center" width="100%" spacing = {8}>
         <Header/>
         <TextField title = "성균인 계정" placeholder="user@skku.edu" savedText = {savedEmail} setForm = {updateForm} width = "300px" />
-        <BtLogin onClick={skkuLogin}/>
+        <BtLogin onClick={login}/>
     </VStack>)
 }
 
