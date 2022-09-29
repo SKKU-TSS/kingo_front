@@ -15,6 +15,7 @@ function bindReceiveData(sendList, setSendData, setIpfs){
 
   setSendData(sendList);
 
+  
   for (let i = 0; i < sendList.length; i++) {
     axios
       .get(`http://localhost:5000/api/result/${sendList[i].hash}`)
@@ -25,6 +26,7 @@ function bindReceiveData(sendList, setSendData, setIpfs){
 
 async function bindData(account, setReceiveData, setIpfs)
 {
+  return
     await getAllTransData(account, (sendData) =>{
       // console.log(response.data[1]._from);
       bindReceiveData(sendData,setReceiveData,setIpfs)

@@ -18,9 +18,9 @@ function getIndex(state){
   const [index, setIndex] = state;
   const path = window.location.pathname.split("/").pop();
 
-  if (path === "/dashboard") {
+  if (path === "dashboard") {
     index !== INDEX_DASHBOARD && setIndex(INDEX_DASHBOARD);
-  } else if (path === "my-transaction") {
+  } else if (path === "my-point") {
     index !== INDEX_POINT && setIndex(INDEX_POINT);
   } else if (path === "check-transactions") {
     index !== INDEX_TRANSACTION  && setIndex(INDEX_TRANSACTION );
@@ -28,11 +28,25 @@ function getIndex(state){
   return [index, setIndex];
 }
 
+function initIndex(){
+  const path = window.location.pathname.split("/").pop();
+
+  if (path === "dashboard") {
+    return INDEX_DASHBOARD
+  } else if (path === "my-point") {
+    return INDEX_POINT
+  } else if (path === "check-transactions") {
+    return INDEX_TRANSACTION
+  }
+}
+
 
 function NavBar() {
   // 좌측 navbar 구현
 
-  const [index, setIndex] = getIndex(useState(0));
+  const [index, setIndex] = getIndex(useState(
+    initIndex()
+  ));
   
 
   return (

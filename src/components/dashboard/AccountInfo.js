@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import { m } from "framer-motion";
+import { useCookies } from "react-cookie";
+import { COOKIE_EMAIL } from "../../CookieConst";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
-const TEXT_MY_ACCOUNT = '내 지갑 주소 : ';
+const TEXT_MY_ACCOUNT = '이메일 주소 : ';
 
 
 function AccountInfo() {
@@ -25,6 +27,8 @@ function AccountInfo() {
   const accountSting = account?.substring(2, 6);
 
   const parseAccountForColor = "#" + account?.substring(2, 8);
+
+  const [username, setUsername, eraseUsername] = useCookies(COOKIE_EMAIL)
   
   //klaythn scope 에서 내 계정에 관한 리스트
 
@@ -57,7 +61,7 @@ function AccountInfo() {
       <Flex align="center" fontSize="3xl" style = {styleFlex}>
         {accountSting}
       </Flex>
-      <MyAccountAddr account = {account}/>
+      <MyAccountAddr account = {username.LOGIN_EMAIL}/>
       {account && (
         <BtnKlaytn account={account}/>
       )}
@@ -67,14 +71,14 @@ function AccountInfo() {
 
 const MyAccountAddr = ({account}) =>{
 
-  const parseAccount =
-  account && account?.substring(0, 10) + "..." + account?.substring(32, 40);
-
+  //const parseAccount =
+  //account && account?.substring(0, 10) + "..." + account?.substring(32, 40);
+  console.log("어카운트")
+  console.log(account)
   return(<VStack>
     <Text fontSize="lg">{TEXT_MY_ACCOUNT}</Text>
-    <Tooltip label={account}>
-      <Text>{parseAccount}</Text>
-    </Tooltip>
+     <Text>{account}</Text>
+
   </VStack>);
 }
 

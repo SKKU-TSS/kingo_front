@@ -4,55 +4,44 @@ import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 import { SKKUBLUE, SKKUBLUE_100 } from "../../colors";
+import { approvePendingData, getPendingData } from "../../remote/PendingTransaction";
 
 const TEXT_POINT_INFO = 'Pending Transaction';
 
 
+
+function dateVisible(date){
+    
+  return `${date.substr(0,4)}년${date.substr(5,2)}월${date.substr(8,2)}일 ${date.substr(11,5)}`
+}
+
+
 function PointStatus() {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
-  const [pointArr, setPointArr] = useState([{
-    id : "1234",
-    title : "service",
-    point : 100,
-    date : "2022.07.14"
-
-  },{
-    id : "1227",
-    title : "service",
-    point : 100,
-    date : "2022.07.14"
-
-  },{
-    id : "3455",
-    title : "service",
-    point : 100,
-    date : "2022.07.14"
-
-  },{
-    id : "2216",
-    title : "service",
-    point : 100,
-    date : "2022.07.14"
-
-  }]);
+  const [pointArr, setPointArr] = useState([
+  
+]);
   const { account } = useWeb3React();
+
+  const getPendingList = ()=>{
+    getPendingData(
+      (response) =>{
+        console.log(response.result)
+        setPointArr(response.result)
+        
+      },
+      (error) =>{
+        
+
+      }
+    )
+  }
 
   useEffect(() => {
 
     
     let isSubscribed = true;
-    getUserInfo(account, (response) =>{
-        if (isSubscribed) {
-          setPointArr(
-            [].concat(
-              response.data[0]._pointA,
-              response.data[0]._pointB,
-              response.data[0]._pointC,
-              response.data[0]._pointD
-            )
-          );
-        }
-      });
+    getPendingList()
     return () => (isSubscribed = false);
   }, []);
 
@@ -60,6 +49,11 @@ function PointStatus() {
 
   const onClickApprove = (id)=>{
     console.log(`Approve Transaction of ${id}`)
+    approvePendingData(id,(response)=>{
+      getPendingList()
+    },(error)=>{
+
+    })
   }
 
 
@@ -78,12 +72,13 @@ function PointStatus() {
             >{TEXT_POINT_INFO}</Text>
             <Box backgroundColor={SKKUBLUE} borderRadius='4px' width='100%' height='4px'/>
           </VStack>
-      <VStack  w="full">
-      {
-        pointArr.map(element => {
-          return <PointItem id = {element.id} title = {element.title} point = {element.point} date = {element.date} onClickApprove={onClickApprove}/>
-        })
-      }
+      <VStack w="full">
+        {
+          
+          pointArr.map(element => {
+            return <PointItem id = {element.uuid} title = {element.description} point = {element.value} date = {dateVisible(element.date)} onClickApprove={onClickApprove}/>
+          })
+        }
 
       </VStack>
     </VStack>

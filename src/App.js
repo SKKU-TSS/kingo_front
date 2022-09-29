@@ -30,8 +30,8 @@ function App() {
       <Container maxW="full" bg="#E5E5E5" p={0}>
         <Flex minH="100vh" h="full">
           <BrowserRouter>
-            {active ? <Redirect to="/dashboard" /> : <Redirect to="/" />}
-            {active ? <NavBar /> : <></>}
+            {active ?? <Redirect to="/dashboard" />}
+            
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={SKKULoginPage}/>
             <Route exact path="/dashboard" component={DashBoard} />

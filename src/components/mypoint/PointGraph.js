@@ -63,6 +63,7 @@ export default function PointGraph() {
 
   const { account } = useWeb3React();
   useEffect(() => {
+    return
     getGraphData(account,response => {
         console.log(response.data);
         const d = response.data[0];
