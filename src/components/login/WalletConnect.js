@@ -16,7 +16,10 @@ function WalletConnect() {
 
   // todo : Redux 도입 필요
   const onClick = () => {
+    
     activate(injectedConnector); //로그인 코드
+
+    window.location.href = '/dashboard'
   };
 
   return (

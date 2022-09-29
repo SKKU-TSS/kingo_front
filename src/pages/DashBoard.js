@@ -8,25 +8,36 @@ import {
   } from "@chakra-ui/react";
   import TotalPoint from "../components/mypoint/TotalPoint";
   import PointStatus from "../components/dashboard/PointStatus";
+  
+  import { BrowserRouter, Route, Redirect } from "react-router-dom";
+  import { useWeb3React } from "@web3-react/core";
+
+
   import PointPieChart from "../components/dashboard/PointPieChart";
   import AccountInfo from "../components/dashboard/AccountInfo";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
+import NavBar from "../components/public/Navbar";
   
   function DashBoard() {
     // 대시보드 페이지
    
-
+    const { active } = useWeb3React();
 
 
     return (
-        <FlexContainer>
-          <TotalPoint />
-          <RecentTransaction />
-          <AccountInfo />
-          <PointPieChart />
-          <PointStatus />
-          {/* <AdminPage /> */}
-        </FlexContainer>
+        <Flex>
+          <NavBar/>
+          <FlexContainer>
+            {!active ?? <Redirect path="/"/>}
+            <TotalPoint />
+            <RecentTransaction />
+            <AccountInfo />
+            <PointPieChart />
+            <PointStatus />
+            {/* <AdminPage /> */}
+          </FlexContainer>
+        </Flex>
+        
     );
   }
 

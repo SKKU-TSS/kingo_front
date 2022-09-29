@@ -3,6 +3,7 @@ import LatestTransactions from "../components/transaction/CheckTransactions";
 import { useState } from "react";
 import Clock from "../components/transaction/Clock";
 import { SKKUBLUE } from "../colors";
+import NavBar from "../components/public/Navbar";
 
 
 const TEXT_TITLE = 'Transaction 현황';
@@ -14,13 +15,17 @@ function Transaction() {
     setModalOn(!modalOn);
   };
   return (
-    <Flex m={10} flexDirection="column" w="full">
+    <Flex w="full">
+      <NavBar/>
+        <Flex m={10} flexDirection="column" w="full">
       <ViewTitle/>
       {/* graph */}
         <LastBlock/>
              
       <TransactionView onOpenModal={onOpenModal} modalOn={modalOn}/>
     </Flex>
+    </Flex>
+    
   );
 }
 
