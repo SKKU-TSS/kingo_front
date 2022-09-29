@@ -21,7 +21,6 @@ function PointStatus() {
     title : "service",
     point : 100,
     date : "2022.07.14"
-
   },{
     id : "3455",
     title : "service",
