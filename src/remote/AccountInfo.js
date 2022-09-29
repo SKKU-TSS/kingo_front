@@ -3,7 +3,7 @@ import BACKEND_URL from "../ServerConst";
 
 
 function getUserInfo(account, callback){
-
+    return
     axios
         .get(BACKEND_URL + "api/userinfo", {
           params: {

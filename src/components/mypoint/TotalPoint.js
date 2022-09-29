@@ -32,6 +32,10 @@ const TotalPoint = () => {
 
   useEffect(() => {
     let isSubscribed = true;
+    
+    return
+
+
     getUserInfo(account,(response) =>{
       if (isSubscribed) {
         setPointArr(
