@@ -18,6 +18,7 @@ function bindSendData(sendList, setSendData, setIpfs){
 
   setSendData(sendList);
 
+
   for (let i = 0; i < sendList.length; i++) {
     axios
       .get(`http://localhost:5000/api/result/${sendList[i].hash}`)
@@ -28,6 +29,7 @@ function bindSendData(sendList, setSendData, setIpfs){
 
 async function bindData(account, setSendData, setIpfs)
 {
+  return
     await getSendData(account, (sendData) =>{
       // console.log(response.data[1]._from);
       bindSendData(sendData,setSendData,setIpfs)

@@ -12,23 +12,6 @@ const PointStatus = () => {
   const [pointArr, setPointArr] = useState([]);
   const { account } = useWeb3React();
 
-  useEffect(() => {
-    let isSubscribed = true;
-
-    getUserInfo(account,(response)=>{
-        if (isSubscribed) {
-          setPointArr(
-            pointArr.concat(
-              response.data[0]._pointA,
-              response.data[0]._pointB,
-              response.data[0]._pointC,
-              response.data[0]._pointD
-            )
-          );
-        }
-      });
-    return () => (isSubscribed = false);
-  }, []);
 
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
   

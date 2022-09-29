@@ -1,11 +1,10 @@
-import { useCookies, Cookies } from "react-cookie"
+import { useCookies, Cookies, CookiesProvider } from "react-cookie"
 import { COOKIE_TOKEN } from "../CookieConst"
 
 
 const commonHeader = ()=>{
 
-    const cookieStore = Cookies()
-
+    const cookieStore = new Cookies()
     return {
         Authorization : `Bearer ${cookieStore.get(COOKIE_TOKEN)}`
     }
