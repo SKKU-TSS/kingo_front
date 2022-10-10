@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import SKKULoginPage from "./pages/skkuLogin.js";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect } from "react";
+import AdminPage from "./pages/AdminPage.js";
 
 const AppWrap = styled.div`
   font-size: 12px;
@@ -37,7 +38,7 @@ function App() {
             <Route exact path="/dashboard" component={DashBoard} />
             <Route exact path="/my-point" component={MyPoint} />
             <Route exact path="/check-transactions" component={Transaction} />
-            
+            <Route exact path="/admin" component={AdminPage}/>
           </BrowserRouter>
         </Flex>
       </Container>

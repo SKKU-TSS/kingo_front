@@ -1,8 +1,17 @@
 import { Box, Image, Spacer, VStack, Link, Text} from "@chakra-ui/react";
 import WalletConnect from "../components/login/WalletConnect";
 import { Link as RouterLink } from "react-router-dom";
+import { useEffect } from "react";
+import { Cookies } from "react-cookie"
 
 function Login() {
+
+    useEffect(()=>{
+        let cookie = new Cookies()
+        window.location.href = "/login"
+        return ()=>{}
+    },[])
+
     return (
         <VStack  width="100%" align="center" justify='center' >
             <Image
