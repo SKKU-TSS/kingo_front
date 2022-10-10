@@ -10,14 +10,17 @@ import SKKULoginPage from "./pages/skkuLogin.js";
 import { useWeb3React } from "@web3-react/core";
 import { useEffect } from "react";
 import AdminPage from "./pages/AdminPage.js";
-
+import { createStore, applyMiddleware, compose } from "redux";
+import { createStoreHook, Provider } from "react-redux";
+import rootReducer from "./redux/reducer"
 const AppWrap = styled.div`
   font-size: 12px;
   font-family: "Poppins", sans-serif;
 `;
 
 
-
+const enhancer =
+  compose(applyMiddleware())
 
 function App() {
   const { active } = useWeb3React();
@@ -26,22 +29,27 @@ function App() {
     document.title = 'Kingo Koin';
   });
 
+  const store = createStore(rootReducer, enhancer)
+
   return (
     <AppWrap>
-      <Container maxW="full" bg="#E5E5E5" p={0}>
-        <Flex minH="100vh" h="full">
-          <BrowserRouter>
-            {active ?? <Redirect to="/dashboard" />}
-            
-            <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={SKKULoginPage}/>
-            <Route exact path="/dashboard" component={DashBoard} />
-            <Route exact path="/my-point" component={MyPoint} />
-            <Route exact path="/check-transactions" component={Transaction} />
-            <Route exact path="/admin" component={AdminPage}/>
-          </BrowserRouter>
-        </Flex>
-      </Container>
+      <Provider store = {store}>
+        <Container maxW="full" bg="#E5E5E5" p={0}>
+          <Flex minH="100vh" h="full">
+            <BrowserRouter>
+              {active ?? <Redirect to="/dashboard" />}
+              
+              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={SKKULoginPage}/>
+              <Route exact path="/dashboard" component={DashBoard} />
+              <Route exact path="/my-point" component={MyPoint} />
+              <Route exact path="/check-transactions" component={Transaction} />
+              <Route exact path="/admin" component={AdminPage}/>
+            </BrowserRouter>
+          </Flex>
+        </Container>
+      </Provider>
+      
     </AppWrap>
   );
 }

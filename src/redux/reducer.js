@@ -1,10 +1,11 @@
 import { combineReducers } from "redux";
 import skkuLogin from './skkusign/reducer'
-import { dashboardReducer } from "./dashboardTable/dashbaordTable";
+import recentDashboard from "./dashboardTable/dashbaordTable";
 
 
-const reducer = combineReducers({
-    skkuLogin, dashboardReducer
+const rootReducer = combineReducers({
+    recentDashboard,
+    skkuLogin
 })
 
-export default reducer;
+export default rootReducer;
