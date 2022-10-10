@@ -24,8 +24,6 @@ import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import { useEffect } from "react";
   
 
-
-
   function DashBoard() {
     // 대시보드 페이지
 

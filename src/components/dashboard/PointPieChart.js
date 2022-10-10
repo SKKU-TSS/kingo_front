@@ -5,6 +5,8 @@ import getUserInfo from "../../remote/AccountInfo";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 import { SKKUBLUE, SKKUBLUE_100 } from "../../colors";
 import { approvePendingData, getPendingData } from "../../remote/PendingTransaction";
+import { actionDashboardItem, DASHBOARD_ITEM } from "../../redux/dashboardTable/dashbaordTable";
+import { useDispatch } from "react-redux";
 
 const TEXT_POINT_INFO = 'Pending Transaction';
 
@@ -37,6 +39,8 @@ function PointStatus() {
     )
   }
 
+  const dispatch = useDispatch()
+
   useEffect(() => {
 
     
@@ -49,8 +53,10 @@ function PointStatus() {
 
   const onClickApprove = (id)=>{
     console.log(`Approve Transaction of ${id}`)
+
     approvePendingData(id,(response)=>{
       getPendingList()
+      dispatch(actionDashboardItem())
     },(error)=>{
 
     })
