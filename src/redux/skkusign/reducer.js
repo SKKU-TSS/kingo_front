@@ -6,7 +6,8 @@ const initState = {
     type : undefined,
     account : {
 
-    }
+    },
+    items : []
 }
 
 const skkuReducer = async (state = initState, action) =>{

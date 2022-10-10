@@ -38,13 +38,20 @@ const RecentTransaction= () => {
     useEffect(() => {
 
       dispatch(actionDashboardItem())
-   
+
+      
     getRecentList()
     return ()=>{}
     },[]
     )
     
-    const { reduxItem } = useSelector(state => state.dashboardReducer)
+    const { recentItem } = useSelector(state => ({recentItem : state.recentDashboard.recentItem}))
+
+    useEffect(()=>{
+      console.log("redux Item")
+     console.log(recentItem)
+   
+    },[recentItem])
 
   const [items, setItems] = useState(
     []
@@ -70,7 +77,9 @@ const RecentTransaction= () => {
           </VStack>
           
       {
-        items.map(item=>{
+       items.map(item=>{
+          console.log("item")
+          console.log(recentItem)
           return <TransItem name = {item.description} value = {item.value} date = {dateVisible(item.date)}/>
         })
       }    
