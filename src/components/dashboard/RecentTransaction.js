@@ -5,6 +5,8 @@ import getUserInfo from "../../remote/AccountInfo";
 import { SKKUGREEN, SKKUGREEN_100 } from "../../colors";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 import { getRecentData } from "../../remote/PendingTransaction";
+import { useDispatch, useSelector } from "react-redux";
+import { actionDashboardItem } from "../../redux/dashboardTable/dashbaordTable";
 
 
 function dateVisible(date){
@@ -31,14 +33,19 @@ const RecentTransaction= () => {
       )
 
     }
+
+    const dispatch = useDispatch()
     useEffect(() => {
 
+      dispatch(actionDashboardItem())
    
     getRecentList()
     return ()=>{}
     },[]
     )
     
+    const { reduxItem } = useSelector(state => state.dashboardReducer)
+
   const [items, setItems] = useState(
     []
     )

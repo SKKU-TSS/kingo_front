@@ -58,7 +58,12 @@ function NavBar() {
           <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_POINT} nav="/my-point" icon={[transactions, activeTransactions]}>Point 현황</BtnNavigation>
           {/**  <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_ADMIN} nav="/admin-page">관리자 페이지</BtnNavigation> */}
         </VStack>
-        <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_TRANSACTION} nav="/check-transactions" >Transaction</BtnNavigation>
+        {
+          /**
+           * <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_TRANSACTION} nav="/check-transactions" >Transaction</BtnNavigation>
+           */
+        }
+        
       </VStack>
     </VStack>
   );
