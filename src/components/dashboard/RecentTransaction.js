@@ -19,43 +19,15 @@ const TEXT_POINT_INFO = '포인트 현황';
 const RecentTransaction= () => {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
   const { account } = useWeb3React();
-
-    let isSubscribed = true;
-
-    const getRecentList = ()=>{
-      getRecentData(
-        (response)=>{
-          console.log(response.result)
-            setItems(response.result)
-        },
-        (error)=>{
-        }
-      )
-
-    }
-
     const dispatch = useDispatch()
     useEffect(() => {
-
-      dispatch(actionDashboardItem())
-
-      
-    getRecentList()
+      actionDashboardItem(dispatch)
     return ()=>{}
     },[]
     )
     
-    const { recentItem } = useSelector(state => ({recentItem : state.recentDashboard.recentItem}))
+    const { recentItem }  = useSelector((state) => state.recentDashboard);
 
-    useEffect(()=>{
-      console.log("redux Item")
-     console.log(recentItem)
-   
-    },[recentItem])
-
-  const [items, setItems] = useState(
-    []
-    )
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
   const style = {
     borderRadius : "15px",
@@ -63,6 +35,8 @@ const RecentTransaction= () => {
     height:  "355px",
     width : isLessThan1195 ? "100%" : DASHBAORD_WIDTH
   }
+  
+
   
   
   return (
@@ -77,9 +51,8 @@ const RecentTransaction= () => {
           </VStack>
           
       {
-       items.map(item=>{
-          console.log("item")
-          console.log(recentItem)
+       recentItem
+       .map(item=>{
           return <TransItem name = {item.description} value = {item.value} date = {dateVisible(item.date)}/>
         })
       }    

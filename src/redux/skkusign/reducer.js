@@ -24,6 +24,7 @@ const skkuReducer = async (state = initState, action) =>{
         default : 
             return state;
     }
+    return state;
 }
 
 export default skkuReducer;

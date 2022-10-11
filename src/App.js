@@ -19,8 +19,7 @@ const AppWrap = styled.div`
 `;
 
 
-const enhancer =
-  compose(applyMiddleware())
+
 
 function App() {
   const { active } = useWeb3React();
@@ -29,12 +28,11 @@ function App() {
     document.title = 'Kingo Koin';
   });
 
-  const store = createStore(rootReducer, enhancer)
+ 
 
   return (
     <AppWrap>
-      <Provider store = {store}>
-        <Container maxW="full" bg="#E5E5E5" p={0}>
+       <Container maxW="full" bg="#E5E5E5" p={0}>
           <Flex minH="100vh" h="full">
             <BrowserRouter>
               {active ?? <Redirect to="/dashboard" />}
@@ -48,8 +46,6 @@ function App() {
             </BrowserRouter>
           </Flex>
         </Container>
-      </Provider>
-      
     </AppWrap>
   );
 }

@@ -56,7 +56,7 @@ function PointStatus() {
 
     approvePendingData(id,(response)=>{
       getPendingList()
-      dispatch(actionDashboardItem())
+      actionDashboardItem(dispatch)
     },(error)=>{
 
     })
