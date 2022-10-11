@@ -3,10 +3,20 @@ import { getRecentData } from "../../remote/PendingTransaction"
 const DASHBOARD_ITEM = "DASHBOARD_ITEM"
 
 
-const actionDashboardItem = (email, token) =>{
-    return {
-        type : DASHBOARD_ITEM
-    }
+const actionDashboardItem = async (dispatch) =>{
+
+    await getRecentData(
+        (response)=>{
+            
+            dispatch( {
+                type : DASHBOARD_ITEM,
+                recentItem : response.result
+            })
+        },
+        (error)=>{
+            
+        }
+      );
 }
 
 
@@ -27,32 +37,19 @@ const initState = {
     name : "Fefefe"
 }
 
-const dashboardReducer = async (state = initState, action) =>{
+const dashboardReducer = (state = initState, action) =>{
 
     switch(action.type)
     {
         case DASHBOARD_ITEM : 
-            await getRecentData(
-                (response)=>{
-                    console.log("redux response")
-                   // console.log(action)
-                  console.log(state)
-                    console.log(response)
-                    console.log("=====redux response")
-                    return {
-                        ...state,
-                        recentItem : response.result
-                    }
-                },
-                (error)=>{
-                    return state
-                }
-              );
+            return {
+                ...state,
+                recentItem : action.recentItem
+            }
             break;
         default : 
             return state;
     }
-    return state;
 }
 
 export {DASHBOARD_ITEM, actionDashboardItem}

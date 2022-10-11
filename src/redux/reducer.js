@@ -4,8 +4,8 @@ import recentDashboard from "./dashboardTable/dashbaordTable";
 
 
 const rootReducer = combineReducers({
-    recentDashboard,
-    skkuLogin
+    recentDashboard : recentDashboard,
+    skkuLogin : skkuLogin
 })
 
 export default rootReducer;
