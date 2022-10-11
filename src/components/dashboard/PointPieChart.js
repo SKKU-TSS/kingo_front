@@ -88,7 +88,7 @@ function PointStatus() {
         />
       </VStack>
       <VStack w="full" h="full">
-        {pointArr.count > 0 ? (
+        {pointArr.length > 0 ? (
           pointArr.map((element) => {
             return (
               <PointItem

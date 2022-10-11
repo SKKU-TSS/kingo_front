@@ -56,7 +56,7 @@ const RecentTransaction = () => {
         />
       </VStack>
 
-      {recentItem.count > 0 ? (
+      {recentItem.length > 0 ? (
         recentItem.map((item) => {
           return (
             <TransItem
