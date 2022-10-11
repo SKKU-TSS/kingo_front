@@ -78,18 +78,32 @@ function PointStatus() {
             >{TEXT_POINT_INFO}</Text>
             <Box backgroundColor={SKKUBLUE} borderRadius='4px' width='100%' height='4px'/>
           </VStack>
-      <VStack w="full">
+      <VStack w="full" h = "full">
         {
-          
+          pointArr.count > 0 ?
           pointArr.map(element => {
             return <PointItem id = {element.uuid} title = {element.description} point = {element.value} date = {dateVisible(element.date)} onClickApprove={onClickApprove}/>
           })
+          : <NullReport/>
         }
 
       </VStack>
     </VStack>
   );
 }
+const NullReport = ()=>{
+  return <Flex
+          width="full"
+          height="full"
+          align="center"
+          justify = "space-evenly"
+          >
+            <Text fontSize="xl">
+          대기중인 내역이 없습니다.
+          </Text>
+        </Flex>
+}
+
 
 const PointItem = ({id, title, point, date, onClickApprove}) =>{
 

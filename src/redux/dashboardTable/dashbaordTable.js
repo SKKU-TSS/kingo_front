@@ -21,20 +21,9 @@ const actionDashboardItem = async (dispatch) =>{
 
 
 const initState = {
-    type : undefined,
-    hei : "sibal",
     recentItem : [
-        {date : "2022-09-28T22:27:24.000Z",
-        description : "킹고인과의 만남",
-        ipfs_hash : null,
-            pending : 0,
-        user_receiver : "wlssud0701@naver.com",
-        user_sender : 4,
-        uuid : 13, 
-        value : 100
-    }
-    ],
-    name : "Fefefe"
+        
+    ]
 }
 
 const dashboardReducer = (state = initState, action) =>{
@@ -46,7 +35,6 @@ const dashboardReducer = (state = initState, action) =>{
                 ...state,
                 recentItem : action.recentItem
             }
-            break;
         default : 
             return state;
     }

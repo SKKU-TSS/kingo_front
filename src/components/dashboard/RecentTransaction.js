@@ -51,15 +51,31 @@ const RecentTransaction= () => {
           </VStack>
           
       {
+        recentItem.count > 0 ?
        recentItem
        .map(item=>{
           return <TransItem name = {item.description} value = {item.value} date = {dateVisible(item.date)}/>
-        })
+        }) :
+        <NullReport/>
+        
       }    
     </VStack>
 
     
   );
+}
+
+const NullReport = ()=>{
+  return <Flex
+          width="full"
+          height="full"
+          align="center"
+          justify = "space-evenly"
+          >
+            <Text fontSize="xl">
+          포인트 내역이 없습니다.
+          </Text>
+        </Flex>
 }
 
 
