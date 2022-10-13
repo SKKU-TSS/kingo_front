@@ -10,6 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import makeTransaction from "../remote/makeTransaction";
 
 const AdminPage = () => {
   let [email, setEmail] = useState("");
@@ -18,7 +19,22 @@ const AdminPage = () => {
   let [password, setPassword] = useState("");
 
   const onClick = () => {
-    // submit input
+    makeTransaction(
+      email,
+      comment,
+      value,
+      password,
+      (response) => {
+        setEmail("");
+        setComment("");
+        setValue("");
+        setPassword("");
+        alert("포인트 생성에 성공했습니다.");
+      },
+      (error) => {
+        alert("포인트 생성에 실패했습니다.");
+      }
+    );
   };
 
   return (
