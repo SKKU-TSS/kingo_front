@@ -21,22 +21,16 @@ function DashBoard() {
   const [tokenCookie, setTokenCookie, removeTokenCookie] =
     useCookies(COOKIE_TOKEN);
 
+  //recieve redirection with cookie
   const getRedirectData = () => {
-    console.log(window.location.href);
     const path = window.location.href.split("/").pop();
-
-    console.log(path);
     const dict = path.split("?").pop().split("&");
-
-    console.log(dict);
-
     const username = `${dict.filter((str) => str.includes("user"))}`
       .split("=")
       .pop();
     const token = `${dict.filter((str) => str.includes("token"))}`
       .split("=")
       .pop();
-
     if (username !== undefined) {
       const name = `${username}`;
       if (name.length < 1) return;
@@ -44,7 +38,6 @@ function DashBoard() {
 
       setEmailCookie(COOKIE_EMAIL, username);
     }
-
     if (token !== undefined) {
       const tk = `${token}`;
       if (tk.length < 1) return;
