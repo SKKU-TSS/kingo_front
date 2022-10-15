@@ -62,7 +62,7 @@ const SKKULoginPage = () => {
 
   useEffect(() => {
     if (emailCookie !== undefined) {
-      setSavedEmail(emailCookie.LOGIN_EMAIL);
+      setSavedEmail(emailCookie.LOGIN_EMAIL.replace("%40", "@"));
     }
   }, []);
 

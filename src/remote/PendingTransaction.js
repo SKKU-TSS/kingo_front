@@ -3,6 +3,7 @@ import { Cookies } from "react-cookie";
 import { COOKIE_TOKEN } from "../CookieConst";
 import BACKEND_URL from "../ServerConst";
 import commonHeader from "./commonHeader";
+import unauthorized from "./unauthorized";
 
 const getRecentData = (onSuccess, onFailed) => {
   const header = commonHeader();
@@ -18,7 +19,9 @@ const getRecentData = (onSuccess, onFailed) => {
       else onFailed(response);
     })
     .catch((error) => {
-      console.log(error);
+      if (error.response) {
+        if (error.response.status === 401) unauthorized();
+      }
       onFailed(error);
     });
 };

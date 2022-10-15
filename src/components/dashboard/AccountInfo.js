@@ -16,7 +16,7 @@ import { useCookies } from "react-cookie";
 import { COOKIE_EMAIL } from "../../CookieConst";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
-const TEXT_MY_ACCOUNT = "이메일 주소 : ";
+const TEXT_MY_ACCOUNT = "이메일 주소";
 
 function AccountInfo() {
   // klaytn 사이트에서 내 계정 정보를 볼 수 있도록 하는 컴포넌트
@@ -55,9 +55,9 @@ function AccountInfo() {
 
   return (
     <VStack p={10} m={3} spacing={5} style={styleVstack}>
-      <Flex align="center" fontSize="3xl" style={styleFlex}>
+      {/*<Flex align="center" fontSize="3xl" style={styleFlex}>
         {accountSting}
-      </Flex>
+  </Flex>*/}
       <MyAccountAddr account={username.LOGIN_EMAIL} />
       {account && <BtnKlaytn account={account} />}
     </VStack>
