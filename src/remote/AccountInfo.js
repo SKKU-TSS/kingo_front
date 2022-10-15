@@ -16,7 +16,10 @@ const dispatchTotalBalance = (dispatch) => {
     .then((response) => {
       if (response.status === 200) {
         console.log(response.data.result[0]);
-        dispatch(actionGetTotalBalance(`${response.data.result[0]}`));
+        let values = `${Object.entries(response.data.result[0])[0]}`.split(",");
+        let value = `${values[1]}`;
+        if (value === "null") value = 0;
+        dispatch(actionGetTotalBalance(value));
       }
     })
     .catch((e) => {});
