@@ -23,11 +23,16 @@ const SKKULoginPage = () => {
   const [form, setForm] = useState({ id: "", pw: "" });
 
   const login = () => {
+    if (form === undefined || form.id === undefined || form.id.length < 1)
+      setForm({
+        id: emailCookie.COOKIE_EMAIL,
+      });
     let domain = form.id.split("@")[1];
+    console.log(form.id);
 
     if (domain === "skku.edu" || domain === "g.skku.edu")
       skkuLogin(
-        form.id,
+        form.id.replace("@", "%40"),
         (response) => {
           alert("메일을 전송했습니다.");
         },
@@ -62,7 +67,7 @@ const SKKULoginPage = () => {
 
   useEffect(() => {
     if (emailCookie !== undefined) {
-      setSavedEmail(emailCookie.LOGIN_EMAIL.replace("%40", "@"));
+      //setSavedEmail(emailCookie.LOGIN_EMAIL.replace("%40", "@"));
     }
   }, []);
 

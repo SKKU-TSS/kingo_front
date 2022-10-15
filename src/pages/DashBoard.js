@@ -12,6 +12,7 @@ import NavBar from "../components/public/Navbar";
 import { useCookies, Cookies } from "react-cookie";
 import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import { useEffect } from "react";
+import { testTokenAvaliable } from "../remote/AccountInfo";
 
 function DashBoard() {
   // 대시보드 페이지
@@ -31,19 +32,29 @@ function DashBoard() {
     const token = `${dict.filter((str) => str.includes("token"))}`
       .split("=")
       .pop();
+
+    console.log("REDIRECT TEST");
+
+    if (token !== undefined) {
+      const tk = `${token}`;
+      if (tk.length < 1) {
+        console.log("TEST TOKEN EXPIRED");
+        testTokenAvaliable();
+        return;
+      }
+      console.log(`token : ${token}`);
+      setTokenCookie(COOKIE_TOKEN, token);
+      window.location.href = "/dashboard";
+    } else {
+      //unauthorized 체크
+    }
+
     if (username !== undefined) {
       const name = `${username}`;
       if (name.length < 1) return;
       console.log(`Username : ${username}`);
 
       setEmailCookie(COOKIE_EMAIL, username);
-    }
-    if (token !== undefined) {
-      const tk = `${token}`;
-      if (tk.length < 1) return;
-      console.log(`token : ${token}`);
-      setTokenCookie(COOKIE_TOKEN, token);
-      window.location.href = "/dashboard";
     }
   };
 

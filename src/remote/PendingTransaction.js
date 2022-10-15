@@ -19,9 +19,6 @@ const getRecentData = (onSuccess, onFailed) => {
       else onFailed(response);
     })
     .catch((error) => {
-      if (error.response) {
-        if (error.response.status === 401) unauthorized();
-      }
       onFailed(error);
     });
 };
