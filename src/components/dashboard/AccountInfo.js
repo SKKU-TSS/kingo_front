@@ -72,7 +72,7 @@ const MyAccountAddr = ({ account }) => {
   return (
     <VStack>
       <Text fontSize="lg">{TEXT_MY_ACCOUNT}</Text>
-      <Text>{account}</Text>
+      <Text>{account.replace("%40", "@")}</Text>
     </VStack>
   );
 };

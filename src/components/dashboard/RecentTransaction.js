@@ -57,7 +57,7 @@ const RecentTransaction = () => {
       </VStack>
 
       {recentItem.length > 0 ? (
-        recentItem.map((item) => {
+        recentItem.slice(0, 4).map((item) => {
           return (
             <TransItem
               name={item.description}
