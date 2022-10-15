@@ -41,7 +41,7 @@ function PointStatus() {
     getPendingData(
       (response) => {
         console.log(response.result);
-        setPointArr(response.result);
+        setPointArr(response.result.slice(0, 4));
       },
       (error) => {}
     );
