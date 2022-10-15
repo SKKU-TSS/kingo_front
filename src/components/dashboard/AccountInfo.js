@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { useWeb3React } from "@web3-react/core";
 import { m } from "framer-motion";
-import { useCookies } from "react-cookie";
-import { COOKIE_EMAIL } from "../../CookieConst";
+import { useCookies, Cookies } from "react-cookie";
+import { COOKIE_EMAIL, COOKIE_TOKEN } from "../../CookieConst";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
 
 const TEXT_MY_ACCOUNT = "이메일 주소";
@@ -65,6 +65,13 @@ function AccountInfo() {
 }
 
 const MyAccountAddr = ({ account }) => {
+  const logOut = () => {
+    const cookie = new Cookies();
+    cookie.remove(COOKIE_TOKEN);
+    alert("로그아웃 되었습니다.");
+    window.location.href = "/";
+  };
+
   //const parseAccount =
   //account && account?.substring(0, 10) + "..." + account?.substring(32, 40);
   console.log("어카운트");
@@ -73,6 +80,9 @@ const MyAccountAddr = ({ account }) => {
     <VStack>
       <Text fontSize="lg">{TEXT_MY_ACCOUNT}</Text>
       <Text>{`${account}`.replace("%40", "@")}</Text>
+      <Button size="md" onClick={() => logOut()}>
+        로그아웃
+      </Button>
     </VStack>
   );
 };

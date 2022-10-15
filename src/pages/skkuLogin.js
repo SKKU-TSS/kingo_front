@@ -11,8 +11,8 @@ import {
 import { useCallback, useEffect, useState } from "react";
 import { actionSkkuLogin } from "../redux/skkusign/action";
 import { connect, useDispatch } from "react-redux";
-import { useCookies } from "react-cookie";
-import { COOKIE_EMAIL } from "../CookieConst";
+import { useCookies, Cookies } from "react-cookie";
+import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import axios from "axios";
 import BACKEND_URL from "../ServerConst";
 import skkuLogin from "../remote/SkkuLogin";
@@ -21,6 +21,13 @@ const SKKULoginPage = () => {
   const dispatch = useDispatch();
 
   const [form, setForm] = useState({ id: "", pw: "" });
+
+  const checkIsLogin = () => {
+    const cookie = new Cookies();
+    const token = cookie.get(COOKIE_TOKEN);
+    if (token === undefined || `${token}`.length < 1) {
+    } else window.location.href = "/dashboard";
+  };
 
   const login = () => {
     if (form === undefined || form.id === undefined || form.id.length < 1)
@@ -66,6 +73,7 @@ const SKKULoginPage = () => {
   const [savedEmail, setSavedEmail] = useState(null);
 
   useEffect(() => {
+    checkIsLogin();
     if (emailCookie !== undefined) {
       //setSavedEmail(emailCookie.LOGIN_EMAIL.replace("%40", "@"));
     }
