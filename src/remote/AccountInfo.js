@@ -14,8 +14,10 @@ const dispatchTotalBalance = (dispatch) => {
     headers: commonHeader(),
   })
     .then((response) => {
-      if (response.status === 200)
-        dispatch(actionGetTotalBalance(response.result));
+      if (response.status === 200) {
+        console.log(response.data.result[0]);
+        dispatch(actionGetTotalBalance(`${response.data.result[0]}`));
+      }
     })
     .catch((e) => {});
 };
