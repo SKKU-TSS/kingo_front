@@ -8,13 +8,12 @@ import activeTransactions from "../../assets/activeTransactions.svg";
 import { Link as RouterLink } from "react-router-dom";
 import { SKKUBLUE } from "../../colors";
 
-
 const INDEX_DASHBOARD = 0;
 const INDEX_POINT = 1;
 const INDEX_TRANSACTION = 2;
 const INDEX_ADMIN = 3;
 
-function getIndex(state){
+function getIndex(state) {
   const [index, setIndex] = state;
   const path = window.location.pathname.split("/").pop();
 
@@ -23,84 +22,90 @@ function getIndex(state){
   } else if (path === "my-point") {
     index !== INDEX_POINT && setIndex(INDEX_POINT);
   } else if (path === "check-transactions") {
-    index !== INDEX_TRANSACTION  && setIndex(INDEX_TRANSACTION );
+    index !== INDEX_TRANSACTION && setIndex(INDEX_TRANSACTION);
   }
   return [index, setIndex];
 }
 
-function initIndex(){
+function initIndex() {
   const path = window.location.pathname.split("/").pop();
 
   if (path === "dashboard") {
-    return INDEX_DASHBOARD
+    return INDEX_DASHBOARD;
   } else if (path === "my-point") {
-    return INDEX_POINT
+    return INDEX_POINT;
   } else if (path === "check-transactions") {
-    return INDEX_TRANSACTION
+    return INDEX_TRANSACTION;
   }
 }
-
 
 function NavBar() {
   // 좌측 navbar 구현
 
-  const [index, setIndex] = getIndex(useState(
-    initIndex()
-  ));
-  
+  const [index, setIndex] = getIndex(useState(initIndex()));
 
   return (
     <VStack spacing={8} p={9} bg="#ffffff" minW="200px">
-      <NavTitle/>
+      <NavTitle />
       <VStack h="full" justify="space-between" spacing={5}>
         <VStack>
-          <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_DASHBOARD} nav="/dashboard" icon={[dashboard, activeDashboard]}>대시보드</BtnNavigation>
-          <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_POINT} nav="/my-point" icon={[transactions, activeTransactions]}>Point 현황</BtnNavigation>
+          <BtnNavigation
+            indexState={[index, setIndex]}
+            btnIndex={INDEX_DASHBOARD}
+            nav="/dashboard"
+            icon={[dashboard, activeDashboard]}
+          >
+            대시보드
+          </BtnNavigation>
+          <BtnNavigation
+            indexState={[index, setIndex]}
+            btnIndex={INDEX_POINT}
+            nav="/my-point"
+            icon={[transactions, activeTransactions]}
+          >
+            Point 현황
+          </BtnNavigation>
           {/**  <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_ADMIN} nav="/admin-page">관리자 페이지</BtnNavigation> */}
         </VStack>
-        {
-          /**
-           * <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_TRANSACTION} nav="/check-transactions" >Transaction</BtnNavigation>
-           */
-        }
-        
+        {/**
+         * <BtnNavigation indexState={[index,setIndex]} btnIndex={INDEX_TRANSACTION} nav="/check-transactions" >Transaction</BtnNavigation>
+         */}
       </VStack>
     </VStack>
   );
 }
-const NavTitle = () =>{
+const NavTitle = () => {
+  return (
+    <HStack>
+      <Text fontSize="xl" fontWeight="900" color={SKKUBLUE}>
+        KingoCoin
+      </Text>
+    </HStack>
+  );
+};
 
-  return(<HStack>
-    <Text fontSize="xl" fontWeight="900" color={SKKUBLUE}>
-      KingoKoin
-    </Text>
-  </HStack>);
-}
-
-
-const BtnNavigation = ({indexState, btnIndex, nav, icon, children}) =>{
-  const [index,setIndex] = indexState;
+const BtnNavigation = ({ indexState, btnIndex, nav, icon, children }) => {
+  const [index, setIndex] = indexState;
   const [_icon, _activeIcon] = icon || [undefined, undefined];
   const styleHstack = {
-    width : "130px",
-    backgroundColor : index === btnIndex ? SKKUBLUE : "#ffffff",
-    borderRadius : "5px"
+    width: "130px",
+    backgroundColor: index === btnIndex ? SKKUBLUE : "#ffffff",
+    borderRadius: "5px",
   };
-  return(<Link onClick={() => setIndex(btnIndex)} as={RouterLink} to={nav}>
-  <HStack    p={3}    spacing={3} style={styleHstack}>
-    {icon && 
-      (<Img src={index === btnIndex ? _activeIcon : _icon} />)
-    }
-    <Text
-      fontSize="sm"
-      fontWeight="bold"
-      color={index === btnIndex ? "#ffffff" : "#A3AED0"}
-    >
-      {children}
-    </Text>
-  </HStack>
-</Link>);
-}
-
+  return (
+    <Link onClick={() => setIndex(btnIndex)} as={RouterLink} to={nav}>
+      <HStack p={3} spacing={3} style={styleHstack}>
+        {icon && <Img src={index === btnIndex ? _activeIcon : _icon} />}
+        <Text
+          fontSize="sm"
+          fontWeight="bold"
+          color={index === btnIndex ? "#ffffff" : "#A3AED0"}
+        >
+          {children}
+        </Text>
+      </HStack>
+    </Link>
+  );
+};
 
 export default NavBar;
