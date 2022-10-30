@@ -5,7 +5,7 @@ import PointStatus from "../components/dashboard/PointStatus";
 import { Redirect } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 
-import PointPieChart from "../components/dashboard/PointPieChart";
+import PendingTransactions from "../components/dashboard/PendingTransactions";
 import AccountInfo from "../components/dashboard/AccountInfo";
 import RecentTransaction from "../components/dashboard/RecentTransaction";
 import NavBar from "../components/public/Navbar";
@@ -80,7 +80,7 @@ function DashBoard() {
         <TotalPoint />
         <RecentTransaction />
         <AccountInfo />
-        <PointPieChart />
+        <PendingTransactions />
         <PointStatus />
         {/* <AdminPage /> */}
       </FlexContainer>

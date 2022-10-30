@@ -30,7 +30,7 @@ const SendItem = ({transData, type}) =>{
       onPointerEnter={()=>setFocus(true)} onPointerLeave = {()=>setFocus(false)}
       bgColor = {focus &&SKKUBLUE_100 }
     >
-      <SourceView  width = {width + '%'} icon={kakaoTalk} text={"KakaoPay"}/>
+      <SourceView  width = {width + '%'} icon={kakaoTalk} text={"Klaytn"}/>
       <TextView width = {width + '%'}title = "Date" content = {transData.date} focus = {focus}/>
       { type !== "from" && (<TextView width = {width + '%'} title="To" content = {transData.to} focus = {focus}/>)    }
       { type !== "to" && (<TextView width = {width + '%'} title="From" content = {transData.from} focus = {focus}/>)    }

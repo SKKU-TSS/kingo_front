@@ -32,7 +32,7 @@ function dateVisible(date) {
   )}일 ${date.substr(11, 5)}`;
 }
 
-function PointStatus() {
+function PendingTransactions() {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
   const [pointArr, setPointArr] = useState([]);
   const { account } = useWeb3React();
@@ -172,4 +172,4 @@ const PointItem = ({ id, title, point, date, onClickApprove }) => {
   );
 };
 
-export default PointStatus;
+export default PendingTransactions;

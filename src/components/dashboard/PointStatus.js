@@ -9,7 +9,7 @@ const TEXT_POINT_INFO = "포인트 현황";
 
 const PointStatus = () => {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
-  const [pointArr, setPointArr] = useState([]);
+  const [pointArr, setPointArr] = useState([200, 100, 150, 200]);
   const { account } = useWeb3React();
 
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
