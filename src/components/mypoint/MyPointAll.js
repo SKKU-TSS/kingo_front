@@ -34,7 +34,7 @@ export default function MyTransactionsAll() {
   const naver = "https://www.naver.com/";
 
   useEffect(() => {
-    bindData(account, setTransData, setIpfs);
+    bindData(account, setTransData);
   }, []);
 
   return (<TransactionTable transData={transData}/>);
