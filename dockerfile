@@ -1,6 +1,7 @@
 FROM node:16.10.0-alpine
 
 WORKDIR /frontend
+
 COPY . .
 
 EXPOSE 3000
