@@ -56,7 +56,7 @@ const SendItem = ({transData, type}) =>{
     <Flex justifyContent="center">
       <VStack align = "start" width = "60%" justifyContent="start" >
         <Text fontSize = 'sm' fontFamily='Poppins' color={focus ? "white" : "#cecece"}>{title}</Text>
-        <Text fontSize='lg'
+        <Text fontSize='md'
 
         >{content}</Text>
       </VStack>

@@ -7,33 +7,18 @@ import axios from "axios";
 import { TabsDescendantsProvider } from "@chakra-ui/react";
 import getSendData from "../../remote/TransactionSend";
 import TransactionTable from "./TransactionTable";
+import getAllTransData from "../../remote/TransactionAll";
 
 
 
 
 
-function bindSendData(sendList, setSendData, setIpfs){
-  
-  const urlList = [];
-
-  setSendData(sendList);
-
-
-  for (let i = 0; i < sendList.length; i++) {
-    axios
-      .get(`http://localhost:5000/api/result/${sendList[i].hash}`)
-      .then((res) => urlList.push(res.data));
-  }
-  setIpfs(urlList);
-}
-
-async function bindData(account, setSendData, setIpfs)
+async function bindData(account, setSendData)
 {
-  return
-    await getSendData(account, (sendData) =>{
-      // console.log(response.data[1]._from);
-      bindSendData(sendData,setSendData,setIpfs)
-    });
+
+    await getAllTransData(account, (sendData) =>{
+        setSendData(sendData)
+    }, 1);
 }
 
  const MyTransactionsSend = () => {

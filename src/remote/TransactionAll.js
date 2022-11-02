@@ -3,15 +3,15 @@ import BACKEND_URL from "../ServerConst";
 import handleTransaction from "./response/HandleTransaction";
 import commonHeader from "./commonHeader";
 
-function getAllTransData(account, callback)
+function getAllTransData(account, callback, option = 0)
 {
     const header = commonHeader();
     axios({
-        url: `${BACKEND_URL}/api/transaction/all`,
+        url: `${BACKEND_URL}/api/transaction/all?option=${option}`,
         method: "get",
         headers: header,
     }).then(
-            function(response){
+            (response)=>{
 
                 //success
                 console.log(response)
