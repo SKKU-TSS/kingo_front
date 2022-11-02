@@ -43,7 +43,7 @@ const getPendingData = (onSuccess, onFailed) => {
 };
 
 const approvePendingData = (id, onSuccess, onFailed) => {
-  const header = commonHeader();
+  const header = commonHeader("POST");
 
   axios({
     url: `${BACKEND_URL}/api/transaction/pending/assign`,

@@ -36,6 +36,7 @@ export default function MyTransactionsAll() {
   const naver = "https://www.naver.com/";
 
   useEffect(() => {
+      console.log("마이포인트 올 로드")
     bindData(account, setTransData);
   }, []);
 
