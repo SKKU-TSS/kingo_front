@@ -16,7 +16,7 @@ async function bindData(account, setReceiveData)
 
     await getAllTransData(account, (sendData) =>{
       setReceiveData(sendData)
-    });
+    }, 0);
 }
 
 export default function MyTransactionsAll() {
