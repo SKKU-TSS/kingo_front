@@ -43,7 +43,10 @@ function DashBoard() {
         return;
       }
       console.log(`token : ${token}`);
-      setTokenCookie(COOKIE_TOKEN, token);
+
+      setTokenCookie(COOKIE_TOKEN, token, {
+          maxAge : 1800
+      });
       window.location.href = "/dashboard";
     } else {
       //unauthorized 체크
