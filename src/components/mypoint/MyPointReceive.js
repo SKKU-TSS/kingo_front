@@ -9,14 +9,15 @@ import { useWeb3React } from "@web3-react/core";
 import axios from "axios";
 import getRecieveData from "../../remote/TransactionReceive";
 import TransactionTable from "./TransactionTable";
+import getAllTransData from "../../remote/TransactionAll";
 
 
 
 async function bindData(account, setReceiveData)
 {
-    await getRecieveData(account, (sendData) =>{
-      setReceiveData(sendData.body)
-    });
+    await getAllTransData(account, (sendData) =>{
+      setReceiveData(sendData)
+    }, 2);
 }
 
 export default function MyTransactionsReceive() {

@@ -19,6 +19,13 @@ const Icon = styled.img`
 `;
 
 
+function dateVisible(date) {
+    return `${date.substr(0, 4)}년${date.substr(5, 2)}월${date.substr(
+            8,
+            2
+            )}일 ${date.substr(11, 5)}`;
+}
+
 const SendItem = ({transData, type}) =>{
 
     const width = 100/ (type ? 5 : 6);
@@ -30,10 +37,10 @@ const SendItem = ({transData, type}) =>{
       onPointerEnter={()=>setFocus(true)} onPointerLeave = {()=>setFocus(false)}
       bgColor = {focus &&SKKUBLUE_100 }
     >
-      <SourceView  width = {width + '%'} icon={kakaoTalk} text={"Klaytn"}/>
-      <TextView width = {width + '%'}title = "Date" content = {transData.date} focus = {focus}/>
-      { type !== "from" && (<TextView width = {width + '%'} title="To" content = {transData.to} focus = {focus}/>)    }
-      { type !== "to" && (<TextView width = {width + '%'} title="From" content = {transData.from} focus = {focus}/>)    }
+      <SourceView  width = {width + '%'} icon={kakaoTalk} text={transData.description}/>
+        <TextView width = {width + '%'}title = "Date" content = {dateVisible(transData.date)} focus = {focus}/>
+      { type !== "from" && (<TextView width = {width + '%'} title={transData.user_receiver} content = {transData.to} focus = {focus}/>)    }
+        { type !== "to" && (<TextView width = {width + '%'} title={transData.user_sender} content = {transData.from} focus = {focus}/>)    }
       {/* <Td>{ipfs[i]}</Td> */}
       <TextView width = {width + '%'} title = "Amount" content = {transData.value} focus = {focus}/>
       <BtnHash width = {width + '%'} link = {Link} text = {transData.hash} focus = {focus}/>
@@ -49,7 +56,7 @@ const SendItem = ({transData, type}) =>{
     <Flex justifyContent="center">
       <VStack align = "start" width = "60%" justifyContent="start" >
         <Text fontSize = 'sm' fontFamily='Poppins' color={focus ? "white" : "#cecece"}>{title}</Text>
-        <Text fontSize='lg'
+        <Text fontSize='md'
 
         >{content}</Text>
       </VStack>

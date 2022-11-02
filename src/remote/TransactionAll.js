@@ -1,9 +1,28 @@
 import axios from "axios";
 import BACKEND_URL from "../ServerConst";
 import handleTransaction from "./response/HandleTransaction";
+import commonHeader from "./commonHeader";
 
-function getAllTransData(account, callback)
+function getAllTransData(account, callback, option = 0)
 {
+    const header = commonHeader();
+    axios({
+        url: `${BACKEND_URL}/api/transaction/all?option=${option}`,
+        method: "get",
+        headers: header,
+    }).then(
+            (response)=>{
+
+                //success
+                console.log(response)
+                callback(
+                        response.data
+                        );
+            }
+            );
+
+    return
+
     callback({
         body : [{
             from : "온라인 명륜당",
@@ -48,16 +67,7 @@ function getAllTransData(account, callback)
     })
     return
 
-    return axios
-    .get(`${BACKEND_URL}api/transaction?who=to&address=${account}`).then(
-        function(response){
 
-            //success
-            callback(
-                handleTransaction(account, response)
-            );
-        }
-    );
 
 }
 

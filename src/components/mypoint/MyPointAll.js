@@ -9,12 +9,14 @@ import axios from "axios";
 import getAllTransData from "../../remote/TransactionAll";
 import TransactionTable from "./TransactionTable";
 
+
+
 async function bindData(account, setReceiveData)
 {
 
     await getAllTransData(account, (sendData) =>{
-      setReceiveData(sendData.body)
-    });
+      setReceiveData(sendData)
+    }, 0);
 }
 
 export default function MyTransactionsAll() {
@@ -34,6 +36,7 @@ export default function MyTransactionsAll() {
   const naver = "https://www.naver.com/";
 
   useEffect(() => {
+      console.log("마이포인트 올 로드")
     bindData(account, setTransData);
   }, []);
 
