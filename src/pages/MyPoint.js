@@ -1,11 +1,8 @@
-import { Flex, HStack, Text, VStack, Box} from "@chakra-ui/layout";
+import { Flex, HStack, Text, VStack} from "@chakra-ui/layout";
 import { useState } from "react";
 import MyPointAll from "../components/mypoint/MyPointAll";
 import MyPointSend from "../components/mypoint/MyPointSend";
 import MyPointReceive from "../components/mypoint/MyPointReceive";
-import PointGraph from "../components/mypoint/PointGraph";
-import { SKKUBLUE } from "../colors";
-import { Button } from "@chakra-ui/react";
 import TypeButton from "../components/mypoint/TypeButton";
 import NavBar from "../components/public/Navbar";
 
@@ -22,7 +19,7 @@ function MyPoint() {
         <Text fontSize="3xl" fontWeight="700">
           My Point 현황
         </Text>
-        <VStack
+          {/*<VStack
           w="full"
           backgroundColor="white"
           borderRadius="5px"
@@ -30,13 +27,12 @@ function MyPoint() {
           marginBottom={5}
           marginTop={5}
         >
-          <PointGraph />
-        </VStack>
+            <PointGraph />
+            </VStack>*/}
         <HStack>
             <TypeButton title = 'ALL' set={setIndex} index={index} num={0}/>
             <TypeButton title = '사용내역' set={setIndex} index={index} num={1}/>
             <TypeButton title = '받은내역' set={setIndex} index={index} num={2}/>
-        
         
         </HStack>
 
