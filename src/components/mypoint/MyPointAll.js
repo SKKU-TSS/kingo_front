@@ -9,11 +9,13 @@ import axios from "axios";
 import getAllTransData from "../../remote/TransactionAll";
 import TransactionTable from "./TransactionTable";
 
+
+
 async function bindData(account, setReceiveData)
 {
 
     await getAllTransData(account, (sendData) =>{
-      setReceiveData(sendData.body)
+      setReceiveData(sendData)
     });
 }
 
