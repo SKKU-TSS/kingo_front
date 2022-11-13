@@ -71,7 +71,7 @@ const DisplayTable = ({type, transData}) =>{
             type !== "to" && (<Th>FROM</Th>)
         }
         <Th>금액</Th>
-        <Th>HASH</Th>
+        <Th>IPFS URL</Th>
       </tr>
     </thead>)
   }
