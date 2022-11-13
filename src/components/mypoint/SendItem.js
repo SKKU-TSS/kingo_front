@@ -1,9 +1,12 @@
 import kakaoTalk from "../../assets/kakaoTalk.png";
-import { HStack, Text, VStack, Flex } from "@chakra-ui/layout";
-import { Button, Link } from "@chakra-ui/react";
+import { HStack, Text, VStack, Flex} from "@chakra-ui/layout";
+import {Button, Link, Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure} from "@chakra-ui/react";
 import styled from "styled-components";
 import { useState } from "react";
 import { SKKUBLUE, SKKUBLUE_100, SKKUORANGE_100 } from "../../colors";
+import {useDispatch, useSelector} from "react-redux";
+import {actionIpfsClose, actionIpfsOpen} from "../../redux/dashboardTable/ipfs";
+import IpfsPopup from "./IpfsPopup";
 
 
 
@@ -78,10 +81,36 @@ const SendItem = ({transData, type}) =>{
 
   const BtnHash = ({link, text, focus}) =>{
 
+    const ipfs = useSelector(state => state.ipfs)
+
+      const url = "https://ipfs.io/ipfs/QmWkywcsE2phCBYS6XeWoybjEsU5fsE5u5YLjQFKbXuWzC"
+    const { isOpen, onOpen, onClose } = useDisclosure()
+      const dispatch = useDispatch()
+
+      const onOpenEx = ()=>{
+        //dispatch(actionIpfsOpen("https://ipfs.io/ipfs/QmWkywcsE2phCBYS6XeWoybjEsU5fsE5u5YLjQFKbXuWzC"))
+
+        onOpen()
+
+          console.log(ipfs)
+
+    }
+      const onCloseEx = ()=>{
+        dispatch(actionIpfsClose())
+        onClose()
+    }
+
     return(<Td>
-      <Button colorScheme='green' size="md" variant = {focus ? 'solid': 'outline'} as={link} isExternal>
+      <Button colorScheme='green' size="md" variant = {focus ? 'solid': 'outline'} onClick = {onOpenEx}>
         Open Hash
       </Button>
+        <Modal isOpen={isOpen} onClose={onCloseEx}>
+            <ModalOverlay/>
+            <ModalContent>
+                <IpfsPopup isOpen={isOpen} onClose={onCloseEx} url = {url}/>
+            </ModalContent>
+
+        </Modal>
     </Td>);
   }
 
