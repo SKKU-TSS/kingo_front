@@ -53,8 +53,8 @@ const temp = (callback)=>{
 
 function getAllTransData(account, callback, option = 0)
 {
-    temp(callback)
-    return
+    //temp(callback)
+    //return
 
     const header = commonHeader();
     axios({
