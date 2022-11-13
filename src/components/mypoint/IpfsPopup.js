@@ -60,11 +60,21 @@ const IpfsPopupModal = ({isOpen, onOpen, onClose, url}) =>{
             <ModalHeader>IPFS URL</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <IpfsPopup url = {url}/>
+                {
+                    url !== null ? <IpfsPopup url = {url}/> : <IpfsPopupNull/>
+                }
             </ModalBody>
             <ModalFooter></ModalFooter>
         </ModalContent>
     </Modal>
+}
+
+const IpfsPopupNull = () =>{
+    return <Flex>
+        <Text width = "100%">
+            아직 IPFS 링크가 존재하지 않습니다.
+        </Text>
+    </Flex>
 }
 
 const IpfsPopup = ({url})=>{

@@ -38,6 +38,7 @@ const SendItem = ({transData, type}) =>{
 
     return(<tr
       onPointerEnter={()=>setFocus(true)} onPointerLeave = {()=>setFocus(false)}
+        onLostPointerCapture={()=>setFocus(false)}
       bgColor = {focus &&SKKUBLUE_100 }
     >
       <SourceView  width = {width + '%'} icon={kakaoTalk} text={transData.description}/>
@@ -46,7 +47,9 @@ const SendItem = ({transData, type}) =>{
         { type !== "to" && (<TextView width = {width + '%'} title={transData.user_sender} content = {transData.from} focus = {focus}/>)    }
       {/* <Td>{ipfs[i]}</Td> */}
       <TextView width = {width + '%'} title = "Amount" content = {transData.value} focus = {focus}/>
-      <BtnHash width = {width + '%'} link = {Link} text = {transData.hash} focus = {focus}/>
+        <BtnHash width = {width + '%'} link = {transData.ipfs_hash} text = {transData.hash} focus = {focus}
+            clearFocus = {()=>setFocus(false)}
+        />
     </tr>);
   }
 
@@ -79,11 +82,11 @@ const SendItem = ({transData, type}) =>{
     </Td>);
   }
 
-  const BtnHash = ({link, text, focus}) =>{
+  const BtnHash = ({link, text, focus, clearFocus}) =>{
 
     const ipfs = useSelector(state => state.ipfs)
 
-      const url = "https://ipfs.io/ipfs/QmWkywcsE2phCBYS6XeWoybjEsU5fsE5u5YLjQFKbXuWzC"
+     // const url = "https://ipfs.io/ipfs/QmWkywcsE2phCBYS6XeWoybjEsU5fsE5u5YLjQFKbXuWzC"
     const { isOpen, onOpen, onClose } = useDisclosure()
       const dispatch = useDispatch()
 
@@ -91,6 +94,7 @@ const SendItem = ({transData, type}) =>{
         //dispatch(actionIpfsOpen("https://ipfs.io/ipfs/QmWkywcsE2phCBYS6XeWoybjEsU5fsE5u5YLjQFKbXuWzC"))
 
         onOpen()
+          clearFocus()
 
           console.log(ipfs)
 
@@ -107,7 +111,7 @@ const SendItem = ({transData, type}) =>{
         <Modal isOpen={isOpen} onClose={onCloseEx}>
             <ModalOverlay/>
             <ModalContent>
-                <IpfsPopup isOpen={isOpen} onClose={onCloseEx} url = {url}/>
+                <IpfsPopup isOpen={isOpen} onClose={onCloseEx} url = {link}/>
             </ModalContent>
 
         </Modal>
