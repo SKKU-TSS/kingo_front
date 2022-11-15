@@ -17,7 +17,7 @@ import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import axios from "axios";
 import BACKEND_URL from "../ServerConst";
 import skkuLogin from "../remote/SkkuLogin";
-import {SKKUGREEN} from "../colors";
+import {SKKUBLUE, SKKUGREEN, SKKUGREEN_100} from "../colors";
 
 const SKKULoginPage = () => {
   const dispatch = useDispatch();
@@ -98,9 +98,9 @@ const SKKULoginPage = () => {
 
                   >
                   <VStack width = "50%" height="100%" justifyContent="center" rounded={10} p ={10} background={SKKUGREEN}>
-                      <Text fontSize='2xl'>KingoCoin, 성균관대학교 학우들을 위한 새로운 Rewarding Token System.</Text>
+                      <Text fontSize='2xl' color={SKKUGREEN_100}>KingoCoin, 성균관대학교 학우들을 위한 새로운 Rewarding Token System.</Text>
                       <Text fontSize='xl'>여러분의 경험과 성취를 직접 확인하고 발전을 위한 더 나은 혜택을 누려보세요.</Text>
-                      <Text fontSize='sm'>KingoCoin 베타서비스에 참여해주신 여러분께 감사드리며, 서비스 품질이 불안정할수 있음에 양해의 말씀을 구합니다.</Text>
+                      <Text fontSize='sm' color = {SKKUBLUE}>KingoCoin 베타서비스에 참여해주신 여러분께 감사드리며, 서비스 품질이 불안정할수 있음에 양해의 말씀을 구합니다.</Text>
                   </VStack>
 
                   <VStack align="center" justifyContent="center" width="50%" height = "100%" spacing={8}
@@ -132,8 +132,8 @@ const Header = () => {
       bgImage={`url('${url}')`}
       bgPosition="center"
       bgRepeat="no-repeat"
-      height="200px"
-      width="200px"
+      height="150px"
+      width="150px"
       bgSize="cover"
     />
   );
