@@ -1,13 +1,16 @@
 import {
-  HStack,
-  Input,
-  VStack,
-  Text,
-  Button,
+    HStack,
+    Input,
+    VStack,
+    Text,
+    Button,
     Flex,
-  Box,
-  InputGroup,
-  InputLeftAddon,
+    Box,
+    InputGroup,
+    InputLeftAddon,
+    Modal, ModalBody, ModalContent, ModalOverlay, useDisclosure,
+    ModalHeader,
+    ModalCloseButton, ModalFooter
 } from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
 import { actionSkkuLogin } from "../redux/skkusign/action";
@@ -17,7 +20,7 @@ import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import axios from "axios";
 import BACKEND_URL from "../ServerConst";
 import skkuLogin from "../remote/SkkuLogin";
-import {SKKUBLUE, SKKUGREEN, SKKUGREEN_100} from "../colors";
+import {SKKUBLUE, SKKUGREEN, SKKUGREEN_100, SKKUORNAGE} from "../colors";
 
 const SKKULoginPage = () => {
   const dispatch = useDispatch();
@@ -31,25 +34,44 @@ const SKKULoginPage = () => {
     } else window.location.href = "/dashboard";
   };
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
+    const [alertText, setAlertText] = useState()
+    const _alert = (text)=>{
+      setAlertText(text)
+        onOpen()
+  }
+
+
   const login = () => {
+
+
+
     if (form === undefined || form.id === undefined || form.id.length < 1)
       setForm({
         id: emailCookie.COOKIE_EMAIL,
       });
-    let domain = form.id.split("@")[1];
-    console.log(form.id);
 
+    let domain = ""
+      try{
+        domain = form.id.split("@")[1];
+        console.log(form.id);
+
+    }
+      catch(error)
+      {
+          
+      }
     if (domain === "skku.edu" || domain === "g.skku.edu")
       skkuLogin(
         form.id.replace("@", "%40"),
         (response) => {
-          alert("메일을 전송했습니다.");
+          _alert("메일을 전송했습니다.");
         },
         (error) => {
-          alert("메일 전송에 실패했습니다.");
+          _alert("메일 전송에 실패했습니다.");
         }
       );
-    else alert("성균관대학교 이메일이 아닙니다.");
+    else _alert("성균관대학교 이메일이 아닙니다.");
 
     //dispatch(actionSkkuLogin(form.id));
   };
@@ -97,9 +119,10 @@ const SKKULoginPage = () => {
                   spacing={0}
 
                   >
-                  <VStack width = "50%" height="100%" justifyContent="center" rounded={10} p ={10} background={SKKUGREEN}>
-                      <Text fontSize='2xl' color={SKKUGREEN_100}>KingoCoin, 성균관대학교 학우들을 위한 새로운 Rewarding Token System.</Text>
-                      <Text fontSize='xl'>여러분의 경험과 성취를 직접 확인하고 발전을 위한 더 나은 혜택을 누려보세요.</Text>
+                  <VStack width = "50%" height="100%" justifyContent="center_vertical" rounded={10} p ={10} background={SKKUGREEN}>
+                      <Text width = "100%" fontSize='3xl' as = 'b' color="#ffffff">KingoCoin</Text>
+                      <Text fontSize='2xl' color={SKKUGREEN_100}>성균관대학교 학우들을 위한 새로운 Rewarding Token System.</Text>
+                      <Text fontSize='xl'  as = 'b' >여러분의 경험과 성취를 직접 확인하고 발전을 위한 더 나은 혜택을 누려보세요.</Text>
                       <Text fontSize='sm' color = {SKKUBLUE}>KingoCoin 베타서비스에 참여해주신 여러분께 감사드리며, 서비스 품질이 불안정할수 있음에 양해의 말씀을 구합니다.</Text>
                   </VStack>
 
@@ -118,6 +141,16 @@ const SKKULoginPage = () => {
                   </VStack>
 
               </HStack>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay/>
+                  <ModalContent>
+                      <ModalHeader>{alertText}</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalFooter></ModalFooter>
+
+                  </ModalContent>
+
+              </Modal>
           </Flex>
 
 
