@@ -4,6 +4,7 @@ import {
   VStack,
   Text,
   Button,
+    Flex,
   Box,
   InputGroup,
   InputLeftAddon,
@@ -16,6 +17,7 @@ import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import axios from "axios";
 import BACKEND_URL from "../ServerConst";
 import skkuLogin from "../remote/SkkuLogin";
+import {SKKUGREEN} from "../colors";
 
 const SKKULoginPage = () => {
   const dispatch = useDispatch();
@@ -83,17 +85,42 @@ const SKKULoginPage = () => {
   //    savedText = emailCookie.LOGIN_EMAIL
 
   return (
-    <VStack align="center" justifyContent="center" width="100%" spacing={8}>
-      <Header />
-      <TextField
-        title="성균인 계정"
-        placeholder="user@skku.edu"
-        savedText={savedEmail}
-        setForm={updateForm}
-        width="300px"
-      />
-      <BtLogin onClick={login} />
-    </VStack>
+
+          <Flex align="center"
+              width = "100%"
+              justifyContent="center">
+
+              <HStack width="700px"
+                  background="#ffffff"
+                  rounded="10"
+                  height="400px"
+                  spacing={0}
+
+                  >
+                  <VStack width = "50%" height="100%" justifyContent="center" rounded={10} p ={10} background={SKKUGREEN}>
+                      <Text fontSize='2xl'>KingoCoin, 성균관대학교 학우들을 위한 새로운 Rewarding Token System.</Text>
+                      <Text fontSize='xl'>여러분의 경험과 성취를 직접 확인하고 발전을 위한 더 나은 혜택을 누려보세요.</Text>
+                      <Text fontSize='sm'>KingoCoin 베타서비스에 참여해주신 여러분께 감사드리며, 서비스 품질이 불안정할수 있음에 양해의 말씀을 구합니다.</Text>
+                  </VStack>
+
+                  <VStack align="center" justifyContent="center" width="50%" height = "100%" spacing={8}
+
+                      >
+                      <Header />
+                      <TextField
+                          title="성균인 계정"
+                          placeholder="user@skku.edu"
+                          savedText={savedEmail}
+                          setForm={updateForm}
+                          width="300px"
+                      />
+                      <BtLogin onClick={login} />
+                  </VStack>
+
+              </HStack>
+          </Flex>
+
+
   );
 };
 
