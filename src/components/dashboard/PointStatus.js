@@ -1,4 +1,4 @@
-import { VStack, HStack, Text, useMediaQuery, Box } from "@chakra-ui/react";
+import {VStack, HStack, Text, useMediaQuery, Box, Flex} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo from "../../remote/AccountInfo";
@@ -9,7 +9,7 @@ const TEXT_POINT_INFO = "포인트 현황";
 
 const PointStatus = () => {
   // 플랫폼 별 포인트 보유량을 볼 수 있도록 한 컴포넌트
-  const [pointArr, setPointArr] = useState([200, 100, 150, 200]);
+  const [pointArr, setPointArr] = useState([0, 0, 0, 0]);
   const { account } = useWeb3React();
 
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
@@ -24,11 +24,14 @@ const PointStatus = () => {
   return (
     <VStack style={style} p={8} align="flex-start" m={3}>
       <Balance />
-      <VStack w="full">
-        <PointItem title="온라인 명륜당" point={pointArr[0]} />
-        <PointItem title="킹고인과의 만남" point={pointArr[1]} />
-        <PointItem title="해오름제" point={pointArr[2]} />
-        <PointItem title="멘토링" point={pointArr[3]} />
+      <VStack height="100%" w="full" align="center" >
+          <Flex width="full" height="full" align="center" justify="space-evenly">
+              <Text fontSize="xl">데이터가 없습니다.</Text>
+          </Flex>
+          {/*<PointItem title="온라인 명륜당" point={pointArr[0]} />
+          <PointItem title="킹고인과의 만남" point={pointArr[1]} />
+          <PointItem title="해오름제" point={pointArr[2]} />
+          <PointItem title="멘토링" point={pointArr[3]} />*/}
       </VStack>
     </VStack>
   );

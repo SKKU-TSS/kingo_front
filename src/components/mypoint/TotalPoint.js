@@ -2,8 +2,10 @@ import { Text, HStack, Box, VStack, useMediaQuery } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import getUserInfo, { dispatchTotalBalance } from "../../remote/AccountInfo";
-import { SKKUBLUE, SKKUGREEN } from "../../colors";
+import {SKKUBLUE, SKKUBLUE_100, SKKUGREEN, SKKUGREEN_100, SKKUORANGE_100} from "../../colors";
 import { useDispatch, useSelector } from "react-redux";
+import {useCookies} from "react-cookie";
+import {COOKIE_EMAIL} from "../../CookieConst";
 
 const TEXT_TOTAL_TITLE = "총 보유 포인트";
 
@@ -54,11 +56,22 @@ const TotalPointView = ({ children }) => {
 };
 
 const TopText = () => {
+
+    const [emailCookie, setEmailCookie, removeEmailCookie] =
+    useCookies(COOKIE_EMAIL);
+
   return (
     <HStack w="full" justify="space-between">
-      <Text color="white" fontWeight="700" fontSize="3xl">
-        {TEXT_TOTAL_TITLE}
-      </Text>
+        <VStack justify="flex-start">
+            <Text justify="flex-start" width = "100%" color="white" fontWeight="900" fontSize="3xl">
+                {`${emailCookie.LOGIN_EMAIL.split('@')[0]}`} 학우님, 안녕하세요?
+            </Text>
+            <Text color={SKKUGREEN_100} fontWeight="600" fontSize="2xl">
+                KingoCoin이 여러분의 자기계발에 항상 함께하겠습니다!
+            </Text>
+        </VStack>
+
+
       <Box />
     </HStack>
   );

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import NavBar from "./components/public/Navbar.js";
-import { Container, Flex } from "@chakra-ui/react";
+import {Container, Flex, PortalManager} from "@chakra-ui/react";
 import DashBoard from "./pages/DashBoard";
 import MyPoint from "./pages/MyPoint";
 import Transaction from "./pages/Transaction";
@@ -33,18 +33,22 @@ function App() {
   return (
     <AppWrap>
        <Container maxW="full" bg="#E5E5E5" p={0}>
-          <Flex minH="100vh" h="full">
-            <BrowserRouter>
-              {active ?? <Redirect to="/dashboard" />}
-              
-              <Route exact path="/" component={Login} />
-              <Route exact path="/login" component={SKKULoginPage}/>
-              <Route exact path="/dashboard" component={DashBoard} />
-              <Route exact path="/my-point" component={MyPoint} />
-              <Route exact path="/check-transactions" component={Transaction} />
-              <Route exact path="/admin" component={AdminPage}/>
-            </BrowserRouter>
-          </Flex>
+           <PortalManager>
+               <Flex minH="100vh" h="full">
+                   <BrowserRouter>
+                       {active ?? <Redirect to="/dashboard" />}
+
+                       <Route exact path="/" component={Login} />
+                       <Route exact path="/login" component={SKKULoginPage}/>
+                       <Route exact path="/dashboard" component={DashBoard} />
+                       <Route exact path="/my-point" component={MyPoint} />
+                       <Route exact path="/check-transactions" component={Transaction} />
+                       <Route exact path="/admin" component={AdminPage}/>
+                   </BrowserRouter>
+               </Flex>
+
+           </PortalManager>
+
         </Container>
     </AppWrap>
   );

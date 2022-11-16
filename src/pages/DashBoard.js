@@ -1,7 +1,7 @@
-import { Flex, useMediaQuery } from "@chakra-ui/react";
+import {Flex, Portal, useMediaQuery} from "@chakra-ui/react";
 import TotalPoint from "../components/mypoint/TotalPoint";
 import PointStatus from "../components/dashboard/PointStatus";
-
+import React from "react"
 import { Redirect } from "react-router-dom";
 import { useWeb3React } from "@web3-react/core";
 
@@ -13,6 +13,7 @@ import { useCookies, Cookies } from "react-cookie";
 import { COOKIE_EMAIL, COOKIE_TOKEN } from "../CookieConst";
 import { useEffect } from "react";
 import { testTokenAvaliable } from "../remote/AccountInfo";
+import {SKKUBLUE_100} from "../colors";
 
 function DashBoard() {
   // 대시보드 페이지
@@ -75,18 +76,27 @@ function DashBoard() {
 
   const { active } = useWeb3React();
 
+  const ModalShouldBeAppendedHere = React.forwardRef((props, ref) => (<div ref={ref} id="modal-should-be-appended-here"/>));
+  const modalRef = React.createRef();
   return (
     <Flex>
       <NavBar />
-      <FlexContainer>
-        {!active ?? <Redirect path="/" />}
-        <TotalPoint />
-        <RecentTransaction />
-        <AccountInfo />
-        <PendingTransactions />
-        <PointStatus />
-        {/* <AdminPage /> */}
-      </FlexContainer>
+
+
+
+
+        <FlexContainer>
+            {!active ?? <Redirect path="/" />}
+            <TotalPoint />
+            <RecentTransaction />
+            <AccountInfo />
+            <PendingTransactions />
+            <PointStatus />
+            
+            {/* <AdminPage /> */}
+        </FlexContainer>
+
+
     </Flex>
   );
 }
