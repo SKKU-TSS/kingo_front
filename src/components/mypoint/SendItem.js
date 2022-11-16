@@ -31,7 +31,7 @@ function dateVisible(date) {
 
 const SendItem = ({transData, type}) =>{
 
-    const width = 100/ (type ? 5 : 6);
+    const width = 100/ (type ? 4.5 : 5.5);
 
 
     const [focus, setFocus] = useState(false);
@@ -42,12 +42,12 @@ const SendItem = ({transData, type}) =>{
       bgColor = {focus &&SKKUBLUE_100 }
     >
       <SourceView  width = {width + '%'} icon={kakaoTalk} text={transData.description}/>
-        <TextView width = {width + '%'}title = "Date" content = {dateVisible(transData.date)} focus = {focus}/>
+        <TextView  width = {width + '%'} title = "Date" content = {dateVisible(transData.date)} focus = {focus}/>
       { type !== "from" && (<TextView width = {width + '%'} title={transData.user_receiver} content = {transData.to} focus = {focus}/>)    }
         { type !== "to" && (<TextView width = {width + '%'} title={transData.user_sender} content = {transData.from} focus = {focus}/>)    }
       {/* <Td>{ipfs[i]}</Td> */}
       <TextView width = {width + '%'} title = "Amount" content = {transData.value} focus = {focus}/>
-        <BtnHash width = {width + '%'} link = {transData.ipfs_hash} text = {transData.hash} focus = {focus}
+        <BtnHash width = {width/2 + '%'} link = {transData.ipfs_hash} text = {transData.hash} focus = {focus}
             clearFocus = {()=>setFocus(false)}
         />
     </tr>);
@@ -59,10 +59,10 @@ const SendItem = ({transData, type}) =>{
     return(
       <Td >
 
-    <Flex justifyContent="center">
-      <VStack align = "start" width = "60%" justifyContent="start" >
+    <Flex justifyContent="center" >
+      <VStack align = "start" width = "80%" justifyContent="start" >
         <Text fontSize = 'sm' fontFamily='Poppins' color={focus ? "white" : "#cecece"}>{title}</Text>
-        <Text fontSize='md'
+        <Text fontSize='sm'
 
         >{content}</Text>
       </VStack>
@@ -75,7 +75,7 @@ const SendItem = ({transData, type}) =>{
 
     return(
     <Td>
-      <HStack justifyContent="center">
+      <HStack justifyContent="flex-start">
         <Icon src={icon} />
         <Text>{text}</Text>
       </HStack>
@@ -105,8 +105,8 @@ const SendItem = ({transData, type}) =>{
     }
 
     return(<Td>
-      <Button colorScheme='green' size="md" variant = {focus ? 'solid': 'outline'} onClick = {onOpenEx}>
-        Open Hash
+      <Button colorScheme='green' size="sm" variant = {focus ? 'solid': 'outline'} onClick = {onOpenEx}>
+        Url
       </Button>
         <Modal isOpen={isOpen} onClose={onCloseEx}>
             <ModalOverlay/>
