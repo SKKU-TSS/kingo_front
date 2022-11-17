@@ -25,7 +25,7 @@ function App() {
   const { active } = useWeb3React();
 
   useEffect(()=>{
-    document.title = 'Kingo Koin';
+    document.title = 'Kingo Coin - 킹고 코인'
   });
 
  
