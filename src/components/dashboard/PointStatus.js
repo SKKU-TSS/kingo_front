@@ -15,7 +15,7 @@ const PointStatus = () => {
   const [isLessThan1195] = useMediaQuery("(max-width:1195px)");
 
   const style = {
-    borderRadius: "15px",
+    borderRadius: "5px",
     backgroundColor: "white",
     height: "355px",
     width: isLessThan1195 ? "100%" : DASHBAORD_WIDTH,

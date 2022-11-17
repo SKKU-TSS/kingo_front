@@ -15,6 +15,7 @@ import { m } from "framer-motion";
 import { useCookies, Cookies } from "react-cookie";
 import { COOKIE_EMAIL, COOKIE_TOKEN } from "../../CookieConst";
 import { DASHBAORD_WIDTH } from "../../pages/DashBoard";
+import {SKKUGREEN_100} from "../../colors";
 
 const TEXT_MY_ACCOUNT = "이메일 주소";
 
@@ -34,10 +35,9 @@ function AccountInfo() {
   console.log(parseAccountForColor);
 
   const styleVstack = {
-    borderRadius: "15px",
+    borderRadius: "5px",
     width: isLessThan1195 ? "100%" : DASHBAORD_WIDTH,
     height: "355px",
-    justifyContent: "center",
     spacing: "5",
     backgroundColor: "white",
   };
@@ -54,14 +54,29 @@ function AccountInfo() {
   };
 
   return (
-    <VStack p={10} m={3} spacing={5} style={styleVstack}>
+    <VStack p={10} m={3} spacing={5} style={styleVstack} justifyContent="flex-start" align="flex-start">
+        <AccountAppbar/>
       {/*<Flex align="center" fontSize="3xl" style={styleFlex}>
         {accountSting}
   </Flex>*/}
-      <MyAccountAddr account={username.LOGIN_EMAIL} />
+      <MyAccountAddr width = "100%" account={username.LOGIN_EMAIL} />
       {account && <BtnKlaytn account={account} />}
     </VStack>
   );
+}
+
+const AccountAppbar = ()=>{
+    return (
+            <VStack spacing={0} p={2}>
+                <Text fontSize="2xl">Account</Text>
+                <Box
+                    backgroundColor={SKKUGREEN_100}
+                    borderRadius="4px"
+                    width="100%"
+                    height="4px"
+                />
+            </VStack>
+            );
 }
 
 const MyAccountAddr = ({ account }) => {
@@ -77,7 +92,7 @@ const MyAccountAddr = ({ account }) => {
   console.log("어카운트");
   console.log(account);
   return (
-    <VStack>
+    <VStack width = "100%" align="center">
       <Text fontSize="lg">{TEXT_MY_ACCOUNT}</Text>
       <Text>{`${account}`.replace("%40", "@")}</Text>
       <Button size="md" onClick={() => logOut()}>
