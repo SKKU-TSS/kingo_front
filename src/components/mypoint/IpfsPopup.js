@@ -82,7 +82,7 @@ const IpfsPopup = ({url})=>{
 
     const downloadText = (text)=>{
         var link = document.createElement('a');
-        link.download = 'file.text';
+        link.download = `${url.split('ipfs/')[1]}.txt`;
         var jsonStr = JSON.stringify(text);
         var blob = new Blob([`${jsonStr}`], {type: 'text/plain'});
         link.href = window.URL.createObjectURL(blob);
