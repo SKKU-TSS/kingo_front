@@ -44,7 +44,7 @@ const TotalPointView = ({ children }) => {
     //backgroundImage : `linear-gradient(#532DFB,${SKKUBLUE})`,
     width: isLessThan1195 ? "100%" : "96%",
     height: "204px",
-    borderRadius: "15px",
+    borderRadius: "6px",
   };
 
   return (
