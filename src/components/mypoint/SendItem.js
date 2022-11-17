@@ -96,7 +96,7 @@ const SendItem = ({transData, type}) =>{
         onOpen()
           clearFocus()
 
-          console.log(ipfs)
+          console.log(link)
 
     }
       const onCloseEx = ()=>{
